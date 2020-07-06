@@ -1,4 +1,5 @@
 //Refrence Videos: https://www.youtube.com/playlist?list=PLD9SRxG6ST3GBsczn8OUKLaErhrvOz9zQ
+//also used chris courses
 //VS Code installed extensions
 /*
 EJS language support
@@ -9,22 +10,27 @@ PHP extension pack
 PHP IntelliSense
 */
 const express = require('express');
-const http = require('http');
 const path = require('path');
 const mysql = require('mysql');
 const dotenv = require('dotenv');
 const cookieParser = require('cookie-parser');
-const socketio = require('socket.io');
+//Authentication Packages
+const session = require('express-session');
+const passport = require('passport');
+const MySQLStore = require('express-mysql-session')(session); 
+//Sequelize DB
+const sequelize = require('./config/database')
 
 let app = express();
-let server = http.createServer(app);
-let io = socketio(server);
-
 
 dotenv.config({ path: './.env'});
 
 
+sequelize.authenticate()
+    .then(() => console.log('Database Connected to Sequelize...'))
+    .catch(err => console.log('Error: ' + err));
 
+//made a mysql databse for login first. So ONLY authentication uses this
 const db =mysql.createConnection({
     host: process.env.DATABASE_HOST,
     port: process.env.DATABASE_PORT,
@@ -54,23 +60,32 @@ db.connect((error) =>{
     }
 });
 
+var options = {
+    host: process.env.DATABASE_HOST,
+    port: process.env.DATABASE_PORT,
+    user: process.env.DATABASE_USER,
+    password: process.env.DATABASE_PASSWORD,
+    database: process.env.DATABASE
+};
+
+var sessionStore = new MySQLStore(options);
+
+app.use(session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    store:sessionStore,
+    saveUninitialized: false
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+
 //define routes
 app.use('/', require('./routes/pages.js'));
 
 app.use('/auth', require('./routes/auth'));
 
-//io connections
-io.on('connection', (socket) =>{
-    console.log('a user has connected');
-
-    
-    socket.on('disconnect', () =>{
-        console.log('user was disconnected');
-    });
-});
-
 
 //server info
 const PORT = 3000 || process.env.PORT;
 
-server.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
