@@ -5,17 +5,8 @@ body {
     max-width: 400px;
     font-family: 'Rubik', sans-serif;
     text-align: center;
-    /* display: grid; */
-    /* height: 100vh; */
-    /* place-items: center; */
 }
 
-/* body {
-    font-family: sans-serif;
-    display: grid;
-    height: 100vh;
-    place-items: center;
-} */
 
 .button {
     margin: 4px 2px;
@@ -93,4 +84,25 @@ display: flex;
 align-items: center;
 justify-content: center;
 font-size: 2em;
+}
+
+.room-details {
+    display: flex;
+    justify-content: space-between;
+}
+
+.game-on {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+figure {
+    height: 100px;
+    width: 100px;
+}
+
+img {
+    height: 100%;
+    width: 100%;
 }
