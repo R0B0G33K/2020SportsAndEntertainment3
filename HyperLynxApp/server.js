@@ -44,7 +44,7 @@ const publicDirectory = path.join(__dirname, './public');
 app.use(express.static(publicDirectory));
 
 //parse URL encoded bodies
-app.use(express.urlencoded({ extended: false}));
+app.use(express.urlencoded({ extended: true}));
 app.use(express.json());
 
 app.use(cookieParser());
@@ -83,6 +83,12 @@ app.use(passport.session());
 app.use('/', require('./routes/pages.js'));
 
 app.use('/auth', require('./routes/auth'));
+
+app.use('/home/game', require('./routes/game'));
+
+app.use('/home/trivia', require('./routes/trivia'));
+
+app.use('/room', require('./routes/rooms'));
 
 
 //server info

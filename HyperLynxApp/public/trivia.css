@@ -1,0 +1,108 @@
+
+body {
+    margin: 0 auto;
+    padding: 40px;
+    max-width: 400px;
+    font-family: 'Rubik', sans-serif;
+    text-align: center;
+}
+
+
+.button {
+    margin: 4px 2px;
+    padding: 15px 32px;
+    width: 100%;
+    background-color: #4A44F2;
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #3726A6;
+    transition: .75s;
+}
+
+
+#timer {
+    display: flex;
+    justify-content: center;
+}
+  
+.base-timer {
+position: relative;
+width: 100px;
+height: 100px;
+}
+
+.base-timer__svg {
+transform: scaleX(-1);
+}
+
+.base-timer__circle {
+fill: none;
+stroke: none;
+}
+
+.base-timer__path-elapsed {
+stroke-width: 7px;
+stroke: grey;
+}
+
+.base-timer__path-remaining {
+stroke-width: 7px;
+stroke-linecap: round;
+transform: rotate(90deg);
+transform-origin: center;
+transition: 1s linear all;
+fill-rule: nonzero;
+stroke: currentColor;
+}
+
+.base-timer__path-remaining.green {
+color: rgb(65, 184, 131);
+}
+
+.base-timer__path-remaining.orange {
+color: orange;
+}
+
+.base-timer__path-remaining.red {
+color: red;
+}
+
+.base-timer__label {
+position: absolute;
+width: 100px;
+height: 100px;
+top: 0;
+display: flex;
+align-items: center;
+justify-content: center;
+font-size: 2em;
+}
+
+.room-details {
+    display: flex;
+    justify-content: space-between;
+}
+
+.game-on {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+figure {
+    height: 100px;
+    width: 100px;
+}
+
+img {
+    height: 100%;
+    width: 100%;
+}

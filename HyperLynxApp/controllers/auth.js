@@ -9,9 +9,11 @@ const db = mysql.createConnection({
     database: process.env.DATABASE
 });
 
+const standardPoints = 100;
+
 exports.register = (req,res) => {
 
-    const {name, username, email, password, passwordConfirm, points} = req.body;
+    const {name, username, email, password, passwordConfirm} = req.body;
 
     db.query('SELECT email FROM users WHERE email = ?', [email], async (error, results) => {
         if(error){
@@ -37,7 +39,7 @@ exports.register = (req,res) => {
             username: username, 
             email: email, 
             password: hashedPassword, 
-            points: points }, (error, results) =>{
+            points: standardPoints }, (error, results) =>{
                 if(error){
                     console.log(error);
                 }else{

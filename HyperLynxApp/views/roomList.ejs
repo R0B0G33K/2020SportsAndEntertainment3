@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>pick a sport</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!-- Google Font  -->
+        <link href="https://fonts.googleapis.com/css2?family=Rubik&display=swap" rel="stylesheet">
+
+        <link rel="stylesheet" href="/trivia.css">
+    </head>
+    <body>
+
+        <div class="container">
+
+
+            <h1>Rooms</h1>
+    
+            <div class="container"> 
+                <% for(let i = 0; i < roomList.length; i++) { %>
+                    <button class="button" id="button" value="<%= roomList[i].roomID %>"><%= roomList[i].Game%> made by User:<%= roomList[i].HostID%></button>
+                <% } %>
+            </div>
+        </div>
+        
+
+        
+        <script>
+            var buttons = document.getElementsByTagName('button');
+            for(var i=0, len = buttons.length; i < len; i++){
+                buttons[i].onclick= function (){
+                    clickFunction (this);
+                }
+            }
+
+            function clickFunction(elmnt) {
+                var room = elmnt.value;
+                location.href = "/room/"+room;
+            };            
+        </script>
+    </body>
+</html>
