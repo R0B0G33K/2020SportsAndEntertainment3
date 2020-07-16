@@ -9,10 +9,13 @@ var crypto = require('crypto');
 var orgs = ["error please refresh"];
 var userElement;
 var games = ["error please refresh"];
+var gameData =["error please refresh"];
 
 router.get('/',authenticationMiddleware(), async (req, res) => {
+    req.session.touch();
     await Sport.aggregate('sport', 'DISTINCT', { plain: false })
         .then(sports => {
+            orgs = ["error please refresh"];
             sports.forEach(fixFormat)
             //put into orgs
         })
@@ -20,9 +23,6 @@ router.get('/',authenticationMiddleware(), async (req, res) => {
         res.render('pick-sport.ejs',{type: 'game', sportsAv: orgs});
 });
 
-router.get('/back',authenticationMiddleware(),(req, res) => {
-    res.redirect('/home');
-});
 
 
 router.get('/:org',authenticationMiddleware(), async (req, res) => {
@@ -32,13 +32,16 @@ router.get('/:org',authenticationMiddleware(), async (req, res) => {
     }
     await Match.findAll({
         raw: true,
-        attributes: ['match'],
+        attributes: ['match','team1','team2'],
         where: {
             sport: req.params.org
         }
     })
     .then(matches =>{
+        games = ["error please refresh"];
+        gameData = ["error please refresh"];
         matches.forEach(makeArray);
+        gameData = matches;
     })
     .catch(err => console.log(err));
 

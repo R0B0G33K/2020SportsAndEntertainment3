@@ -65,7 +65,10 @@ var options = {
     port: process.env.DATABASE_PORT,
     user: process.env.DATABASE_USER,
     password: process.env.DATABASE_PASSWORD,
-    database: process.env.DATABASE
+    database: process.env.DATABASE,
+    clearExpired: true,
+    checkExpirationInterval: 900000,
+    expiration: 86400000
 };
 
 var sessionStore = new MySQLStore(options);
@@ -92,6 +95,6 @@ app.use('/room', require('./routes/rooms'));
 
 
 //server info
-const PORT = 3000 || process.env.PORT;
+const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

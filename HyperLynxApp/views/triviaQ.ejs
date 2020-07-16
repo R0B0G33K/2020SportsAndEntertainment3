@@ -14,7 +14,7 @@
     <body>
 
         <div class="container">
-
+            <a href="/back"><h1>Home</h1></a>
             <div id="timer"></div>
 
             <h1> <%= teamName %> Trivia</h1>
@@ -90,6 +90,7 @@
 
             function onTimesUp() {
             clearInterval(timerInterval);
+            location.href = "/home/trivia/submitAnswer";
             }
 
             function startTimer() {

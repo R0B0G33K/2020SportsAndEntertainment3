@@ -18,9 +18,6 @@ const db = mysql.createConnection({
 });
 
 
-router.get('/back',authenticationMiddleware(),(req, res) => {
-    res.redirect('/home');
-});
 
 
 router.post('/:roomID/:betID/joinBet',authenticationMiddleware(), async (req, res) => {
@@ -125,6 +122,7 @@ router.post('/delete',authenticationMiddleware(), async (req, res) => {
 });
 
 router.get('/:roomID', authenticationMiddleware(), async (req, res) => {
+	req.session.touch();
 	uniqueBetID = [];
 
 	await Challenge.findAll({
