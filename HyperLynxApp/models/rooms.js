@@ -27,6 +27,9 @@ module.exports = db.define(
         ExpireDate:{
             type: Sequelize.DATE,
             allowNull: false
+        },
+        username:{
+            type: Sequelize.STRING        
         }
     },
     {

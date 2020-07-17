@@ -31,6 +31,7 @@ router.get('/logout', authenticationMiddleware(), (req, res) => {
 });
 
 router.get('/home', authenticationMiddleware(), async (req, res) => { 
+	req.session.touch();
     await db.query('SELECT * FROM users WHERE id = ?', 
 	[req.user.id], (error, results) =>{
 		if(error){
@@ -41,6 +42,10 @@ router.get('/home', authenticationMiddleware(), async (req, res) => {
             res.render('home.ejs', {user: req.user});
 		}
 	});
+});
+
+router.get('/back',authenticationMiddleware(),(req, res) => {
+    res.redirect('/home');
 });
 
 function authenticationMiddleware () {  

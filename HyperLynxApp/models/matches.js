@@ -13,6 +13,12 @@ module.exports = db.define(
         },
         date:{
             type: Sequelize.DATE
+        },
+        team1:{
+            type: Sequelize.STRING,
+        },
+        team2:{
+            type: Sequelize.STRING,
         }
     },
     {

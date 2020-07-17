@@ -4,6 +4,7 @@
 
     <%- include('./partials/navbar') %>
 
+<<<<<<< HEAD
     <div class="container home">
 
 
@@ -13,6 +14,18 @@
             <% for(let i = 0; i < gameList.length; i++) { %>
                 <button class="button" id="button"><%= gameList[i] %></button>
             <% } %>
+=======
+        <div class="container">
+            <a href="/back"><h1>Home</h1></a>
+
+            <h1>Choose an Upcoming Game!</h1>
+    
+            <div class="container"> 
+                <% for(let i = 0; i < gameList.length; i++) { %>
+                    <button class="button" id="button"><%= gameList[i].split("_").join(" ") %></button>
+                <% } %>
+            </div>
+>>>>>>> 8a261bcf1a6ebc5cbebb680752460ae2a183b5c3
         </div>
     </div>
     
@@ -26,6 +39,7 @@
             }
         }
 
+<<<<<<< HEAD
         function clickFunction(elmnt){
             var game = elmnt.innerHTML;
             game = game.split(" ").join("");
@@ -33,3 +47,13 @@
         };                   
     </script>
 </body>
+=======
+            function clickFunction(elmnt){
+                var game = elmnt.innerHTML;
+                game = game.split(" ").join("_");
+                location.href = "/home/<%= type %>/<%= orgName %>/"+game+"";
+            };                   
+        </script>
+    </body>
+</html>
+>>>>>>> 8a261bcf1a6ebc5cbebb680752460ae2a183b5c3

@@ -14,13 +14,13 @@
     <body>
 
         <div class="container">
-
+            <a href="/back"><h1>Home</h1></a>
 
             <h1>Rooms</h1>
     
             <div class="container"> 
                 <% for(let i = 0; i < roomList.length; i++) { %>
-                    <button class="button" id="button" value="<%= roomList[i].roomID %>"><%= roomList[i].Game%> made by User:<%= roomList[i].HostID%></button>
+                    <button class="button" id="button" value="<%= roomList[i].roomID %>"><%= roomList[i].Game.split("_").join(" ")%> made by User: <%= roomList[i].username%></button>
                 <% } %>
             </div>
         </div>

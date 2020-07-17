@@ -44,8 +44,18 @@ exports.register = (req,res) => {
                     console.log(error);
                 }else{
                     console.log('User Registered');
-                    return res.render('register.ejs', {
-                        message: 'User Registered'
+
+                    db.query('SELECT * FROM users WHERE email = ?', [email], async (error, results) =>{
+                        if(results.length<1 || !(await bcrypt.compare(password, results[0].password))){
+                            return res.status(400).render('login.ejs', {
+                                message: 'Error'
+                            }); 
+                        } else{
+                            const user_id = results[0];
+                            req.login(user_id, function(err) {
+                                res.status(200).redirect("/home");
+                            });
+                        }
                     });     
                 }
             });
