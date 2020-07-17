@@ -1,22 +1,10 @@
 <!DOCTYPE html>
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>pick a sport</title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-
-        <!-- Google Font  -->
-        <link href="https://fonts.googleapis.com/css2?family=Rubik&display=swap" rel="stylesheet">
-
-        <link rel="stylesheet" href="/trivia.css">
-    </head>
+<%- include('./partials/head') %>
     <body>
-
+        <%- include('./partials/navbarAuth') %>
         <div class="container">
-            <a href="/back"><h1>Home</h1></a>
 
-            <h1>Choose a Sport for <%= type %>!</h1>
+            <h1>Choose a Sport</h1>
     
             <div class="container"> 
                 <% for(let i = 0; i < sportsAv.length; i++) { %>

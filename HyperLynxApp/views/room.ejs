@@ -1,18 +1,7 @@
 <!DOCTYPE html>
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>game room</title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-
-        <!-- Google Font  -->
-        <link href="https://fonts.googleapis.com/css2?family=Rubik&display=swap" rel="stylesheet">
-
-        <link rel="stylesheet" href="/trivia.css">
-    </head>
+<%- include('./partials/head') %>
     <body>
-        <a href="/back"><h1>Home</h1></a>
+        <%- include('./partials/navbarAuth') %>
         <div class="container">
             <div class="room-details">
                     <h3>Public Status: <%= status %></h3>
@@ -20,12 +9,12 @@
             <h1><%= Game.split("_").join(" ") %></h1>
             <div class="game-on">
                 <figure>
-                    <img src="images/feverLogo.png" alt="">
+                    <img src="/images/teams/<%=Org%>/<%=teams.team1%>.svg" alt="">
                     <figcaption></figcaption>
                 </figure>
                 <h3>VS</h3>
                 <figure>
-                    <img src="images/skyLogo.png" alt="">
+                    <img src="/images/teams/<%=Org%>/<%=teams.team2%>.svg" alt="">
                     <figcaption></figcaption>
                 </figure>
             </div>

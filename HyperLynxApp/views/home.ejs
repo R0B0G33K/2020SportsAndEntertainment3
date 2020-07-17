@@ -1,18 +1,11 @@
+<%- include('./partials/head') %>
 
-<head>
-    <title>App</title>
-    <link rel="stylesheet" href="/trivia.css">
-</head>
 <body>
-
+    <%- include('./partials/navbarAuth') %>
     <h1 id="heading">Hello <%= user.username %></h1>
     <aside>
         <h2>Points: <%= user.points %></h2>
     </aside>
-    <button class="button" id="gameButton">Challenge Zone</button>
-    <br>
-    <button class="button" id="triviaButton">Trivia Center</button>
-    <br>
     <form method="POST" action="/home/game/listMine" style="display: inline;">
     <button type="submit" class="button" id="myRooms">My Challenge Rooms</button>
     </form>
@@ -20,14 +13,3 @@
     <br>
     <button class="button" id="ButtonTwo" onclick="FriendsLink">Friends</button>
     <button class="button" id="ButtonTwo" onclick="SocialLink">Social</button>
-
-    <a href="/logout"><h2>Log Out</h2></a>
-
-    <script type="text/javascript">
-        document.getElementById("gameButton").onclick = function () {
-            location.href = "/home/game";
-        };
-        document.getElementById("triviaButton").onclick = function () {
-            location.href = "/home/trivia";
-        };
-    </script>

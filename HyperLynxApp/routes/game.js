@@ -24,7 +24,7 @@ router.get('/',authenticationMiddleware(), async (req, res) => {
             //put into orgs
         })
         .catch(err => console.log(err));
-        res.render('pick-sport.ejs',{type: 'game', sportsAv: orgs});
+        res.render('pick-sport.ejs',{type: 'game', sportsAv: orgs, user: req.user});
 });
 
 
@@ -49,7 +49,7 @@ router.get('/:org',authenticationMiddleware(), async (req, res) => {
     })
     .catch(err => console.log(err));
 
-    res.render('upcomingGames.ejs', {orgName: req.params.org, gameList: games, type: 'game'});
+    res.render('upcomingGames.ejs', {orgName: req.params.org, gameList: games, type: 'game', user: req.user});
 });
 
 router.get('/:org/:match',authenticationMiddleware(),(req, res) => {
@@ -62,7 +62,7 @@ router.get('/:org/:match',authenticationMiddleware(),(req, res) => {
     if(!(games.some(checkMatching))){
         return res.redirect('/home/game')
     }
-    res.render('create-game.ejs', {orgName: req.params.org, matchName: req.params.match, type: 'game'});
+    res.render('create-game.ejs', {orgName: req.params.org, matchName: req.params.match, type: 'game',user: req.user});
 });
 
 router.post('/:org/:match/createroom',authenticationMiddleware(), async (req, res) => {
@@ -155,7 +155,7 @@ router.post('/listMine',authenticationMiddleware(), async (req, res) => {
         else {
             roomsBetOn = roomsBetOn.concat(rooms);
             console.log(roomsBetOn);
-            res.render('roomList.ejs', {roomList: roomsBetOn})
+            res.render('roomList.ejs', {roomList: roomsBetOn, user: req.user})
         }
     })
     .catch(err => console.log(err));
@@ -210,7 +210,7 @@ router.post('/:org/:match/listAll',authenticationMiddleware(), async (req, res) 
                 })
                 .catch(err => console.log(err));
             }
-            res.render('roomList.ejs', {roomList: gameData})
+            res.render('roomList.ejs', {roomList: gameData, user: req.user})
         }
     })
     .catch(err => console.log(err));

@@ -3,6 +3,7 @@ const router = express.Router();
 const mysql = require('mysql');
 var bodyParser = require('body-parser')
 const Challenge = require('../models/challenges');
+const Match = require('../models/matches');
 const Room = require('../models/rooms');
 var crypto = require('crypto');
 
@@ -156,13 +157,24 @@ router.get('/:roomID', authenticationMiddleware(), async (req, res) => {
             roomID: req.params.roomID
         }
     })
-    .then(rooms =>{
+    .then(async rooms =>{
         if(rooms === undefined || rooms.length == 0){ 
 			res.redirect('/home');
         }
         else if(rooms.length == 1) {
-			console.log('room Challenges');
-            res.render('room.ejs', {HostID: rooms[0].HostID, user: req.user, Org: rooms[0].Org, Game: rooms[0].Game, status: rooms[0].Public, roomID: req.params.roomID, listOfBets: roomChallenges, listOfBetID: uniqueBetID});
+
+			await Match.findAll({
+				raw: true,
+				attributes: ['team1','team2'],
+				where: {
+					match: rooms[0].Game
+				}
+			})
+			.then(matches =>{
+				res.render('room.ejs', {HostID: rooms[0].HostID, user: req.user, Org: rooms[0].Org, Game: rooms[0].Game, status: rooms[0].Public, roomID: req.params.roomID, listOfBets: roomChallenges, listOfBetID: uniqueBetID, teams: matches[0]});
+
+			})
+			.catch(err => console.log(err));
 		}
 		else{
 			console.log('Multiple Room Same ID ERROR');

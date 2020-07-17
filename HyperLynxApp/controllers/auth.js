@@ -44,19 +44,19 @@ exports.register = (req,res) => {
                     console.log(error);
                 }else{
                     console.log('User Registered');
-
+                    //may be causing error in login
                     db.query('SELECT * FROM users WHERE email = ?', [email], async (error, results) =>{
-                        if(results.length<1 || !(await bcrypt.compare(password, results[0].password))){
+                        if(results === undefined|| results.length<1 || !(await bcrypt.compare(password, results[0].password))){
                             return res.status(400).render('login.ejs', {
                                 message: 'Error'
                             }); 
                         } else{
-                            const user_id = results[0];
-                            req.login(user_id, function(err) {
+                            const user_iid = results[0];
+                            req.login(user_iid, function(err) {
                                 res.status(200).redirect("/home");
                             });
                         }
-                    });     
+                    });  
                 }
             });
     });
@@ -73,7 +73,7 @@ exports.login = async (req, res) =>{
         }
 
         db.query('SELECT * FROM users WHERE email = ?', [email], async (error, results) =>{
-            if(results.length<1 || !(await bcrypt.compare(password, results[0].password))){
+            if(results === undefined|| results.length<1 || !(await bcrypt.compare(password, results[0].password))){
                 return res.status(400).render('login.ejs', {
                     message: 'The Email or Password is incorrect'
                 }); 

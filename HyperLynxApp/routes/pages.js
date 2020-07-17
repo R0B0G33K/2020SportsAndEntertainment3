@@ -10,7 +10,7 @@ const db = mysql.createConnection({
     database: process.env.DATABASE
 });
 
-router.get('/',(req, res) => {
+router.get('/',NOTauthenticationMiddleware(),(req, res) => {
     res.render('index.ejs');
 });
 
