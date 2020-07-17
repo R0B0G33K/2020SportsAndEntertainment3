@@ -1,35 +1,43 @@
-<!DOCTYPE html>
+
 <%- include('./partials/head') %>
-    <body>
-        <%- include('./partials/navbarAuth') %>
-        <div class="container">
-            <div class="room-details">
-                    <h3>Public Status: <%= status %></h3>
-            </div>
-            <h1><%= Game.split("_").join(" ") %></h1>
-            <div class="game-on">
-                <figure>
-                    <img src="/images/teams/<%=Org%>/<%=teams.team1%>.svg" alt="">
-                    <figcaption></figcaption>
-                </figure>
-                <h3>VS</h3>
-                <figure>
-                    <img src="/images/teams/<%=Org%>/<%=teams.team2%>.svg" alt="">
-                    <figcaption></figcaption>
-                </figure>
-            </div>
-            
-            <h1>Current Challenges:</h1>
-            
-            <% if(listOfBets !== undefined || listOfBets.length > 0) { %>
-            <% for(let i = 0; i < listOfBetID.length; i++) { %>
-            <% var betID = listOfBetID[i];%>
-            <% var pool = 0;%>
-            <% var found = listOfBets.find(element => element.bettingID == betID) %>
-            <div style="display: flex; justify-content: space-between;">
-                <h3><%= found.type %> Challenge!</h3>
-                <h3>Wager: <%= found.wager %></h3>
-            </div>  
+<body>
+    <%- include('./partials/navbarAuth') %>
+    <div class="container room">
+        <div class="room-details">
+                <h3>Public Status: <%= status %></h3>
+        </div>
+        <h1><%= Game.split("_").join(" ") %></h1>
+        <div class="game-on">
+            <figure>
+                <img src="/images/teams/<%=Org%>/<%=teams.team1%>.svg" alt="">
+                <figcaption></figcaption>
+            </figure>
+            <h3>VS</h3>
+            <figure>
+                <img src="/images/teams/<%=Org%>/<%=teams.team2%>.svg" alt="">
+                <figcaption></figcaption>
+            </figure>
+        </div>
+
+        <div class="home">
+            <h1 style="margin-bottom: 0;">Room details:</h1>
+            <p style="padding-bottom: 35px;">
+                Make a prediction to start the room. Invite your friends to the room so
+                they can make a prediction. Competitors who make the right prediction
+                split the pool of points.
+            </p>
+        </div>
+        
+        <% if(listOfBets !== undefined || listOfBets.length > 0) { %>
+        <% for(let i = 0; i < listOfBetID.length; i++) { %>
+        <% var betID = listOfBetID[i];%>
+        <% var pool = 0;%>
+        <% var found = listOfBets.find(element => element.bettingID == betID) %>
+        <div style="display: flex; justify-content: space-between;">
+            <h3><%= found.type %> Challenge!</h3>
+            <h3>Wager: <%= found.wager %></h3>
+        </div> 
+        <div style="text-align: center;"> 
             <table id="<%=betID %>">
                 <div class="container"> 
                     <tr>
@@ -43,60 +51,71 @@
                             <td><%= listOfBets[j].userName %></td>
                             <td><%= listOfBets[j].bet %></td>
                         </tr>
-                    <% } %>
-                    <% } %>
+                    <% } %> <% } %>
                 </div>
             </table>
-            <div>
-                <h3 style="margin-bottom: 2.5em;">Pool: <%= pool %></h3>
-            </div>
-            <form method="POST" action="/room/<%= roomID %>/<%=betID %>/joinBet">
-                <input type="hidden" id="wager" name="wager" value =<%=found.wager%>>
-                <input type="hidden" id="type" name="type" value =<%=found.type%>>
-                <label for="bet">What is your prediction?</label>
-                <input type="text" id="bet" name="bet">
-                <button class="button" type="submit">Join Challenge</button>
-            </form>
-            <% } %>
-            <% } %>
-
-            <div class="container"> 
-            <% if(user.id == HostID) { %>
-            <h2>Add challenge!</h2>
-            <form method="POST" action="/room/<%= roomID %>/postChallenge">
-                <select id="challenge" name="challenge">
-                    <option value="coinflip">Coin Flip</option>
-                    <option value="winner">Winner</option>
-                    <option value="pointSpread">Point Spread</option>
-                    <option value="mostAssists">Most Assists</option>
-                </select>
-                <label for="wager">Set a wager amount for challenge!</label>
-                <input type="number" id="wager" name="wager" min="5" max="1000">
-                <label for="bet">What is your prediction?</label>
-                <input type="text" id="bet" name="bet">
-                <button class="button" type="submit">Submit</button>
-            </form>
-            <br>
-            <% } %>
-            </div>
-
-            <div class="container"> 
-                <% if(user.id == HostID) { %>
-                    <form method="POST" action="/room/delete">
-                    <input type="hidden" id="HostID" name="HostID" value =<%=HostID%>>
-                    <input type="hidden" id="Org" name="Org" value =<%=Org%>> 
-                    <input type="hidden" id="Game" name="Game" value =<%=Game%>>    
-                    <button class="button" type="submit">Close Room</button>
-                    </form>
-                <% } %>
-            </div>
-
+            <h3 style="margin-bottom: 2.5em;">Pool: <%= pool %></h3>
         </div>
-        
+        <form style="padding: 0;" method="POST" action="/room/<%= roomID %>/<%=betID %>/joinBet">
+            <ul class="flex-outer">
+            <input type="hidden" id="wager" name="wager" value =<%=found.wager%>>
+            <input type="hidden" id="type" name="type" value =<%=found.type%>>
+            <li>
+                <label for="bet">What is your prediction?</label>
+                <input type="text" id="bet" name="bet">
+            </li>
+            <li>
+                <button class="button" type="submit">Join Challenge</button>
+            </li>
+        </ul>
+        </form>
+        <% } %>
+        <% } %>
 
-        
-        <script>
-                
-        </script>
-    </body>
-</html>
+        <div class="container"> 
+        <% if(user.id == HostID) { %>
+        <h2 style="margin-top: 100px;">Add a challenge to the room</h2>
+        <form method="POST" action="/room/<%= roomID %>/postChallenge">
+            <ul class="flex-outer">
+                <li>
+                    <select id="challenge" name="challenge">
+                        <option value="coinflip">Coin Flip</option>
+                        <option value="winner">Winner</option>
+                        <option value="pointSpread">Point Spread</option>
+                        <option value="mostAssists">Most Assists</option>
+                    </select>
+                </li>
+                <li>
+                    <label for="wager">Set a wager amount for challenge!</label>
+                    <input type="number" id="wager" name="wager" min="5" max="1000">
+                </li>
+                <li>
+                    <label for="bet">What is your prediction?</label>
+                    <input type="text" id="bet" name="bet">
+                </li>
+                <li>
+                    <button class="button" type="submit">Submit</button>
+                </li>
+            </ul>
+        </form>
+        <br />
+        <% } %>
+        </div>
+
+        <hr>
+
+        <div class="container"> 
+            <% if(user.id == HostID) { %>
+                <form method="POST" action="/room/delete">
+                    <ul class="flex-outer" >
+                        <input type="hidden" id="HostID" name="HostID" value =<%=HostID%>>
+                        <input type="hidden" id="Org" name="Org" value =<%=Org%>> 
+                        <input type="hidden" id="Game" name="Game" value =<%=Game%>>    
+                        <li><button class="button" type="submit">Close Room</button></li>
+                    </ul>
+                </form>
+            <% } %>
+        </div>
+
+    </div>
+</body>

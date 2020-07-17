@@ -2,11 +2,11 @@
 <%- include('./partials/head') %>
     <body>
         <%- include('./partials/navbarAuth') %>
-        <div class="container">
+        <div class="container home">
 
-            <h1>Get your game on!</h1>
+            <h1>Deep breath...go with your gut.</h1>
     
-            <div class="container"> 
+            <div class="containers"> 
                 <form method="POST" action="/home/game/<%= orgName %>/<%= matchName %>/createroom">
                 <button class="button" id="button" type="submit">Create your own game room</button>
                 </form>

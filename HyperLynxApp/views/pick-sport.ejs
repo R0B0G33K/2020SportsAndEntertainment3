@@ -2,15 +2,15 @@
 <%- include('./partials/head') %>
     <body>
         <%- include('./partials/navbarAuth') %>
-        <div class="container">
+        <div class="container home">
 
             <h1>Choose a Sport</h1>
-    
-            <div class="container"> 
-                <% for(let i = 0; i < sportsAv.length; i++) { %>
-                    <button class="button" id="button"><%= sportsAv[i].split("_").join(" ") %></button>
-                <% } %>
-            </div>
+            <ul class="flex-outer">
+            <% for(let i = 0; i < sportsAv.length; i++) { %>
+                <li><button class="button" id="button"><%= sportsAv[i].split("_").join(" ") %></button></li>
+            <% } %>
+            </ul>
+
         </div>
         
 

@@ -2,18 +2,19 @@
 <%- include('./partials/head') %>
     <body>
         <%- include('./partials/navbarAuth') %>
-        <div class="container">
+        <div class="container home">
 
-            <h1>Choose an Upcoming Game!</h1>
+            <h1>Choose an upcoming event.</h1>
     
             <div class="container"> 
+                <ul class="flex-outer">
                 <% for(let i = 0; i < gameList.length; i++) { %>
-                    <button class="button" id="button"><%= gameList[i].split("_").join(" ") %></button>
+                    <li><button class="button" id="button"><%= gameList[i].split("_").join(" ") %></button></li>
                 <% } %>
+                </ul>
             </div>
         </div>
         
-
         
         <script>
             var buttons = document.getElementsByTagName('button');

@@ -7,9 +7,11 @@
             <h1>Choose a team for your trivia</h1>
     
             <div class="container"> 
+                <ul class="flex-outer">
                 <% for(let i = 0; i < teamList.length; i++) { %>
-                    <button class="button" id="button"><%= teamList[i].split("_").join(" ") %></button>
+                    <li><button class="button" id="button"><%= teamList[i].split("_").join(" ") %></button></li>
                 <% } %>
+                </ul>
             </div>
         </div>
         
