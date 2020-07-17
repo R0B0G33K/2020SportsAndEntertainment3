@@ -133,7 +133,7 @@ router.get('/:roomID', authenticationMiddleware(), async (req, res) => {
         }
     })
     .then(async challenges =>{
-		if(challenges == null || challenges.length > 0){
+		if(challenges != null || challenges.length > 0){
 			challenges.forEach(makeArray);
 
 			await Challenge.aggregate('bettingID', 'DISTINCT', { plain: false, raw: true, where:{roomID: req.params.roomID}})

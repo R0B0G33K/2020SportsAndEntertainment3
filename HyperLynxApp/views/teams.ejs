@@ -20,7 +20,7 @@
     
             <div class="container"> 
                 <% for(let i = 0; i < teamList.length; i++) { %>
-                    <button class="button" id="button"><%= teamList[i] %></button>
+                    <button class="button" id="button"><%= teamList[i].split("_").join(" ") %></button>
                 <% } %>
             </div>
         </div>
@@ -37,7 +37,7 @@
 
             function clickFunction(elmnt){
                 var team = elmnt.innerHTML;
-                team = team.split(" ").join("");
+                team = team.split(" ").join("_");
                 location.href = "/home/<%= type %>/<%= orgName %>/"+team+"";
             };              
         </script>
