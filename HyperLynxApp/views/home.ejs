@@ -1,27 +1,37 @@
 
-<head>
-    <title>App</title>
-    <link rel="stylesheet" href="/trivia.css">
-</head>
+<%- include('./partials/head') %>
+
 <body>
 
-    <h1 id="heading">Hello <%= user.username %></h1>
-    <aside>
-        <h2>Points: <%= user.points %></h2>
-    </aside>
-    <button class="button" id="gameButton">Challenge Zone</button>
+    <%- include('./partials/navbar') %>
+    <div class="container home">
+
+    <h1>Welcome to home base.</h1>
+    <p>Create or join challenge rooms. This is where you predict sport outcomes against your friends to earn the most points. Remember, points earn you prizes!</p>
     <br>
-    <button class="button" id="triviaButton">Trivia Center</button>
+    <p>Checkout the earn prizes tab to learn about other ways to earn points.</p>
     <br>
+    <br>
+    <div class="flex">
+        <h2 id="heading">Profile: <span><%= user.username %></span></h2>
+        <h2>Points: <span><%= user.points %></span></h2>
+    </div>
+    
+
+
+    <button class="button" id="gameButton">Create or join a challenge room</button>
+    <!-- <button class="button" id="triviaButton">Trivia Center</button> -->
+    <!-- <br> -->
     <form method="POST" action="/home/game/listMine" style="display: inline;">
-    <button type="submit" class="button" id="myRooms">My Challenge Rooms</button>
+        <button type="submit" class="button" id="myRooms">Games in progress</button>
     </form>
     <button class="button" id="ButtonOne" onclick="ShopLink">Prize Shop</button>
-    <br>
     <button class="button" id="ButtonTwo" onclick="FriendsLink">Friends</button>
     <button class="button" id="ButtonTwo" onclick="SocialLink">Social</button>
 
-    <a href="/logout"><h2>Log Out</h2></a>
+    </div>
+
+
 
     <script type="text/javascript">
         document.getElementById("gameButton").onclick = function () {
@@ -31,3 +41,5 @@
             location.href = "/home/trivia";
         };
     </script>
+
+</body>

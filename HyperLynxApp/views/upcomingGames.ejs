@@ -1,18 +1,20 @@
-<!DOCTYPE html>
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>pick a sport</title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+<%- include('./partials/head') %>
 
-        <!-- Google Font  -->
-        <link href="https://fonts.googleapis.com/css2?family=Rubik&display=swap" rel="stylesheet">
+<body>
 
-        <link rel="stylesheet" href="/trivia.css">
-    </head>
-    <body>
+    <%- include('./partials/navbar') %>
 
+<<<<<<< HEAD
+    <div class="container home">
+
+
+        <h1>Choose an upcoming event.</h1>
+
+        <div class="containers"> 
+            <% for(let i = 0; i < gameList.length; i++) { %>
+                <button class="button" id="button"><%= gameList[i] %></button>
+            <% } %>
+=======
         <div class="container">
             <a href="/back"><h1>Home</h1></a>
 
@@ -23,18 +25,29 @@
                     <button class="button" id="button"><%= gameList[i].split("_").join(" ") %></button>
                 <% } %>
             </div>
+>>>>>>> 8a261bcf1a6ebc5cbebb680752460ae2a183b5c3
         </div>
-        
+    </div>
+    
 
-        
-        <script>
-            var buttons = document.getElementsByTagName('button');
-            for(var i=0, len = buttons.length; i < len; i++){
-                buttons[i].onclick= function (){
-                    clickFunction (this);
-                }
+    
+    <script>
+        var buttons = document.getElementsByTagName('button');
+        for(var i=0, len = buttons.length; i < len; i++){
+            buttons[i].onclick= function (){
+                clickFunction (this);
             }
+        }
 
+<<<<<<< HEAD
+        function clickFunction(elmnt){
+            var game = elmnt.innerHTML;
+            game = game.split(" ").join("");
+            location.href = "/home/<%= type %>/<%= orgName %>/"+game+"";
+        };                   
+    </script>
+</body>
+=======
             function clickFunction(elmnt){
                 var game = elmnt.innerHTML;
                 game = game.split(" ").join("_");
@@ -43,3 +56,4 @@
         </script>
     </body>
 </html>
+>>>>>>> 8a261bcf1a6ebc5cbebb680752460ae2a183b5c3

@@ -29,14 +29,31 @@ h1 {
     padding: 15px 0 20px;
 }
 
+h2 {
+    margin: 10px 20px 10px 0;
+    font-weight: 600;
+}
+
+.room h2 {
+    padding-bottom: 15px;
+}
+
 .start h2, .start a {
     text-decoration: none;
     text-align: center;
     margin: 20px;
 }
 
+h2 span {
+    font-weight: 300;
+}
 
 
+.flex {
+    display: flex;
+    justify-content: start;
+    flex-flow: row wrap;
+}
 
 
 
@@ -352,8 +369,8 @@ nav a {
 
 
 
-/* 
-.button {
+
+.home .button {
   margin: 4px 2px;
   padding: 15px 32px;
   width: 100%;
@@ -363,14 +380,26 @@ nav a {
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 16px;
+  font-size: 36px;
   cursor: pointer;
+  font-family: 'Montserrat', sans-serif;
 }
 
-button:hover {
+.home button:hover {
   background-color: #3726a6;
   transition: 0.75s;
 }
+
+.home form {
+    padding: 0;
+}
+
+.home p {
+    font-size: 24px;
+    padding-bottom: 15px;
+}
+
+
 
 #timer {
   display: flex;
@@ -441,12 +470,26 @@ button:hover {
   align-items: center;
 }
 
-figure {
-  height: 100px;
-  width: 100px;
+.room table {
+    border: 5px solid black;
+    border-collapse: collapse;
+    width: 100%;
+    font-size: 20px;
+    margin-bottom: 20px;
 }
 
-img {
-  height: 100%;
-  width: 100%;
-} */
+.room th, .room td {
+    border: 3px solid black;
+    text-align: center;
+}
+.room form {
+    padding: 0;
+}
+
+.room select {
+    font-size: 24px;
+    min-width: 250px;
+    background-color: rgb(232, 240, 254); 
+    font-family: 'Montserrat', sans-serif;
+}
+
