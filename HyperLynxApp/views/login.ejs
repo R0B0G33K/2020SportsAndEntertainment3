@@ -1,21 +1,34 @@
-<link rel="stylesheet" href="/trivia.css">
-<h1>Login</h1>
-<form action="/auth/login" method="POST">
-    <div>
-        <label for="email">Email</label>
-        <input type="email" id="email" name="email"
-        required>
+
+
+<%- include('./partials/head') %>
+
+<body>
+    <%- include('./partials/navbar') %>
+    <div class="container">
+        <form action="/auth/login" method="POST">
+            <h1>Moments away from glory...</h1>
+            <ul class="flex-outer">
+                <li>
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </li>
+                <li>
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required>
+                </li>
+                <li>
+                    <button type="submit">Start Playing</button>
+                </li>
+                <li>
+                    <button><a href="/register">No account? <br> Click here to register</a></button>
+                </li>
+                <li>
+                    <% if (message) { %> <h4><%= message %></h4><% } %>
+                </li>
+                    
+            </ul>
+        </form>
     </div>
-    <div>
-        <label for="password">Password</label>
-        <input type="password" id="password" name="password"
-        required>
-    </div>
-    <button type="submit">Login</button>
-</form>
-<a href="/register">Register</a>
-<div>
-    <% if (message) { %>
-        <h4><%= message %></h4>
-    <% } %>
-</div>
+
+    
+</body>
