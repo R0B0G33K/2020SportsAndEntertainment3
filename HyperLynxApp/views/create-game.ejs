@@ -1,37 +1,28 @@
-<!DOCTYPE html>
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>create game</title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-
-        <!-- Google Font  -->
-        <link href="https://fonts.googleapis.com/css2?family=Rubik&display=swap" rel="stylesheet">
-
-        <link rel="stylesheet" href="/trivia.css">
-    </head>
-    <body>
-
-        <div class="container">
 
 
-            <h1>Get your game on!</h1>
-    
-            <div class="container"> 
-                <form method="POST" action="/home/game/<%= orgName %>/<%= matchName %>/createroom">
-                <button class="button" id="button" type="submit">Create your own game room</button>
-                </form>
-                <form method="POST" action="/home/game/<%= orgName %>/<%= matchName %>/listAll">
-                <button class="button" id="button">Join existing game room</button>
-                </form>
-            </div>
+<%- include('./partials/head') %>
+
+<body>
+    <%- include('./partials/navbar') %>
+
+    <div class="container home">
+
+
+        <h1>Deep breath...go with your gut.</h1>
+
+        <div class="containers"> 
+            <form method="POST" action="/home/game/<%= orgName %>/<%= matchName %>/createroom">
+            <button class="button" id="button" type="submit">Create your own game room</button>
+            </form>
+            <form method="POST" action="/home/game/<%= orgName %>/<%= matchName %>/listAll">
+            <button class="button" id="button">Join existing game room</button>
+            </form>
         </div>
-        
+    </div>
+    
 
-        
-        <script>
-                
-        </script>
-    </body>
-</html>
+    
+    <script>
+            
+    </script>
+</body>

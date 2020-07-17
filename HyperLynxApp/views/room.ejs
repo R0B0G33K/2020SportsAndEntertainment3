@@ -1,113 +1,141 @@
-<!DOCTYPE html>
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>game room</title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+<%- include('./partials/head') %>
 
-        <!-- Google Font  -->
-        <link href="https://fonts.googleapis.com/css2?family=Rubik&display=swap" rel="stylesheet">
+<body>
+  <%- include('./partials/navbar') %>
 
-        <link rel="stylesheet" href="/trivia.css">
-    </head>
-    <body>
-        <a href="/room/back"><h1>Home</h1></a>
-        <div class="container">
-            <div class="room-details">
-                    <h3>Public Status: <%= status %></h3>
-            </div>
-            <h1><%= Game %></h1>
-            <div class="game-on">
-                <figure>
-                    <img src="images/feverLogo.png" alt="">
-                    <figcaption></figcaption>
-                </figure>
-                <h3>VS</h3>
-                <figure>
-                    <img src="images/skyLogo.png" alt="">
-                    <figcaption></figcaption>
-                </figure>
-            </div>
+  <div class="container room">
+    <div class="room-details">
+      <h3>Public Status: <%= status %></h3>
+    </div>
+    <h1><%= Game %></h1>
+    <div class="game-on">
+      <figure>
+        <img src="images/feverLogo.png" alt="" />
+        <figcaption></figcaption>
+      </figure>
+      <!-- <h3>VS</h3> -->
+      <figure>
+        <img src="images/skyLogo.png" alt="" />
+        <figcaption></figcaption>
+      </figure>
+    </div>
+
+    <div class="home">
+      <h1 style="margin-bottom: 0;">Room details:</h1>
+      <p style="padding-bottom: 35px;">
+        Make a prediction to start the room. Invite your friends to the room so
+        they can make a prediction. Competitors who make the right prediction
+        split the pool of points.
+      </p>
+    </div>
+
+    <% if(listOfBets !== undefined || listOfBets.length > 0) { %> <% for(let i =
+    0; i < listOfBetID.length; i++) { %> <% var betID = listOfBetID[i];%> <% var
+    pool = 0;%> <% var found = listOfBets.find(element => element.bettingID ==
+    betID) %>
+    <div style="display: flex; justify-content: space-between;">
+      <h2><%= found.type %> challenge:</h2>
+      <h2>Wager: <%= found.wager %></h2>
+    </div>
+    <div style="text-align: center;">
+    <table id="<%=betID %>">
+      <div class="containers">
+        <tr>
+          <th>Competitor</th>
+          <th>Prediction</th>
+        </tr>
+        <% for(let j = 0; j < listOfBets.length; j++) { %> <%
+        if(listOfBets[j].bettingID == betID) { %> <% pool = pool +
+        listOfBets[j].wager; %>
+        <tr>
+          <td><%= listOfBets[j].userName %></td>
+          <td><%= listOfBets[j].bet %></td>
+        </tr>
+        <% } %> <% } %>
+      </div>
+    </table>
+    
+      <h3 style="margin-bottom: 1em;">Pool: <%= pool %> points</h3>
+    </div>
+    <form style="padding: 0;" method="POST" action="/room/<%= roomID %>/<%=betID %>/joinBet">
+      <ul class="flex-outer">
+        <li>
+          <input type="hidden" id="wager" name="wager" value =<%=found.wager%>>
+        </li>
+        <li>
+          <input type="hidden" id="type" name="type" value =<%=found.type%>>
+        </li>
+        <li>
+            <label for="bet">What is your prediction?</label>
+            <input type="text" id="bet" name="bet" />
+        </li>
+        <li>
+            <button class="button" type="submit">Sumbit prediction to join room.</button>
+        </li>
+      </ul>
+    </form>
+    <% } %> <% } %>
+
+
+    <div class="containers">
+      <% if(user.id == HostID) { %>
+      <h2 style="margin-top: 100px;">Add another challenge to the room (optional).</h2>
+      <form method="POST" action="/room/<%= roomID %>/postChallenge">
+
+        <ul class="flex-outer">
+
             
-            <h1>Current Challenges:</h1>
-            
-            <% if(listOfBets !== undefined || listOfBets.length > 0) { %>
-            <% for(let i = 0; i < listOfBetID.length; i++) { %>
-            <% var betID = listOfBetID[i];%>
-            <% var pool = 0;%>
-            <% var found = listOfBets.find(element => element.bettingID == betID) %>
-            <div style="display: flex; justify-content: space-between;">
-                <h3><%= found.type %> Challenge!</h3>
-                <h3>Wager: <%= found.wager %></h3>
-            </div>  
-            <table id="<%=betID %>">
-                <div class="container"> 
-                    <tr>
-                        <th>Competitors</th>
-                        <th>Selection</th>
-                    </tr>
-                    <% for(let j = 0; j < listOfBets.length; j++) { %>
-                    <% if(listOfBets[j].bettingID == betID) { %>
-                        <% pool = pool + listOfBets[j].wager; %>
-                        <tr>
-                            <td><%= listOfBets[j].userName %></td>
-                            <td><%= listOfBets[j].bet %></td>
-                        </tr>
-                    <% } %>
-                    <% } %>
-                </div>
-            </table>
-            <div>
-                <h3 style="margin-bottom: 2.5em;">Pool: <%= pool %></h3>
-            </div>
-            <form method="POST" action="/room/<%= roomID %>/<%=betID %>/joinBet">
-                <input type="hidden" id="wager" name="wager" value =<%=found.wager%>>
-                <input type="hidden" id="type" name="type" value =<%=found.type%>>
-                <label for="bet">What is your prediction?</label>
-                <input type="text" id="bet" name="bet">
-                <button class="button" type="submit">Join Challenge</button>
-            </form>
-            <% } %>
-            <% } %>
+        
 
-            <div class="container"> 
-            <% if(user.id == HostID) { %>
-            <h2>Add challenge!</h2>
-            <form method="POST" action="/room/<%= roomID %>/postChallenge">
+            <li>
                 <select id="challenge" name="challenge">
-                    <option value="coinflip">Coin Flip</option>
-                    <option value="winner">Winner</option>
-                    <option value="pointSpread">Point Spread</option>
-                    <option value="mostAssists">Most Assists</option>
+                <option value="coinflip">Coin Flip</option>
+                <option value="winner">Winner</option>
+                <option value="pointSpread">Point Spread</option>
+                <option value="mostAssists">Most Assists</option>
                 </select>
-                <label for="wager">Set a wager amount for challenge!</label>
-                <input type="number" id="wager" name="wager" min="5" max="1000">
+            </li>
+            <li>
+                <label for="wager">How many points to join challenge?</label>
+                <input type="number" id="wager" name="wager" min="5" max="1000" />
+            </li>
+            <li>
                 <label for="bet">What is your prediction?</label>
-                <input type="text" id="bet" name="bet">
+                <input type="text" id="bet" name="bet" />
+            </li>
+            <li>
                 <button class="button" type="submit">Submit</button>
-            </form>
-            <br>
-            <% } %>
-            </div>
+            </li>
 
-            <div class="container"> 
-                <% if(user.id == HostID) { %>
-                    <form method="POST" action="/room/delete">
-                    <input type="hidden" id="HostID" name="HostID" value =<%=HostID%>>
-                    <input type="hidden" id="Org" name="Org" value =<%=Org%>> 
-                    <input type="hidden" id="Game" name="Game" value =<%=Game%>>    
-                    <button class="button" type="submit">Close Room</button>
-                    </form>
-                <% } %>
-            </div>
+        </ul>
+      </form>
+      <br />
+      <% } %>
+    </div>
+    
 
-        </div>
-        
+    <hr>
 
-        
-        <script>
-                
-        </script>
-    </body>
-</html>
+    <form style="margin-top: 50px;">
+        <ul class="flex-outer">
+            <li><button class="button" type="submit">Save Room</button></li>
+        </ul>
+    </form>
+
+    <div class="containers">
+      <% if(user.id == HostID) { %>
+      <form method="POST" action="/room/delete">
+        <ul class="flex-outer" >
+            <li><input type="hidden" id="HostID" name="HostID" value =<%=HostID%>></li>
+            <li><input type="hidden" id="Org" name="Org" value =<%=Org%>> </li>
+            <li><input type="hidden" id="Game" name="Game" value =<%=Game%>></li>
+            <li><button class="button" type="submit">Close Room</button></li>
+        </ul>
+      </form>
+      <p style="padding-top: 10px;">This will close the game for good. Points in the pool will be distributed accordingly.</p>
+      <% } %>
+    </div>
+  </div>
+
+  <script></script>
+</body>

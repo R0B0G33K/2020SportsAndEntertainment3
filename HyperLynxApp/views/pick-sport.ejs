@@ -1,45 +1,36 @@
-<!DOCTYPE html>
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>pick a sport</title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <!-- Google Font  -->
-        <link href="https://fonts.googleapis.com/css2?family=Rubik&display=swap" rel="stylesheet">
+<%- include('./partials/head') %>
 
-        <link rel="stylesheet" href="/trivia.css">
-    </head>
-    <body>
+<body>
 
-        <div class="container">
+    <%- include('./partials/navbar') %>
+
+    <div class="container home">
 
 
-            <h1>Choose a Sport for <%= type %>!</h1>
+        <h1>Choose a sport to start a <%= type %>.</h1>
+
+        
+        <% for(let i = 0; i < sportsAv.length; i++) { %>
+            <button class="button" id="button"><%= sportsAv[i] %></button>
+        <% } %>
+        
+    </div>
     
-            <div class="container"> 
-                <% for(let i = 0; i < sportsAv.length; i++) { %>
-                    <button class="button" id="button"><%= sportsAv[i] %></button>
-                <% } %>
-            </div>
-        </div>
-        
 
-        
-        <script>
-            var buttons = document.getElementsByTagName('button');
-            for(var i=0, len = buttons.length; i < len; i++){
-                buttons[i].onclick= function (){
-                    clickFunction (this);
-                }
+    
+    <script>
+        var buttons = document.getElementsByTagName('button');
+        for(var i=0, len = buttons.length; i < len; i++){
+            buttons[i].onclick= function (){
+                clickFunction (this);
             }
+        }
 
-            function clickFunction(elmnt) {
-                var sportName = elmnt.innerHTML;
-                sportName = sportName.split(" ").join("");
-                location.href = "/home/<%= type %>/"+sportName+"";
-            };            
-        </script>
-    </body>
-</html>
+        function clickFunction(elmnt) {
+            var sportName = elmnt.innerHTML;
+            sportName = sportName.split(" ").join("");
+            location.href = "/home/<%= type %>/"+sportName+"";
+        };            
+    </script>
+</body>
