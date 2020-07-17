@@ -17,6 +17,7 @@ const db = mysql.createConnection({
 });
 
 router.get('/',authenticationMiddleware(), async (req, res) => {
+    req.session.touch();
     await Sport.aggregate('sport', 'DISTINCT', { plain: false })
         .then(sports => {
             sports.forEach(fixFormat)
@@ -26,10 +27,10 @@ router.get('/',authenticationMiddleware(), async (req, res) => {
         res.render('pick-sport.ejs',{type: 'trivia', sportsAv: orgs});
 });
 
-router.get('/back',authenticationMiddleware(),(req, res) => {
-    res.redirect('/home');
-});
 
+router.get('/submitAnswer',authenticationMiddleware(),(req, res) => {
+    res.render('completedTrivia.ejs', {type: 'loser'});
+});
 
 router.post('/submitAnswer',authenticationMiddleware(),(req, res) => {
     if(req.body.userAnswer == req.body.answer){
