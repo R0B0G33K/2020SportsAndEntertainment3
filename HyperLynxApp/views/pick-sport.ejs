@@ -3,25 +3,10 @@
 
 <body>
 
-<<<<<<< HEAD
     <%- include('./partials/navbar') %>
 
     <div class="container home">
 
-=======
-        <div class="container">
-            <a href="/back"><h1>Home</h1></a>
-
-            <h1>Choose a Sport for <%= type %>!</h1>
-    
-            <div class="container"> 
-                <% for(let i = 0; i < sportsAv.length; i++) { %>
-                    <button class="button" id="button"><%= sportsAv[i].split("_").join(" ") %></button>
-                <% } %>
-            </div>
-        </div>
-        
->>>>>>> 8a261bcf1a6ebc5cbebb680752460ae2a183b5c3
 
         <h1>Choose a sport to start a <%= type %>.</h1>
 
@@ -42,7 +27,6 @@
             }
         }
 
-<<<<<<< HEAD
         function clickFunction(elmnt) {
             var sportName = elmnt.innerHTML;
             sportName = sportName.split(" ").join("");
@@ -50,13 +34,3 @@
         };            
     </script>
 </body>
-=======
-            function clickFunction(elmnt) {
-                var sportName = elmnt.innerHTML;
-                sportName = sportName.split(" ").join("_");
-                location.href = "/home/<%= type %>/"+sportName+"";
-            };            
-        </script>
-    </body>
-</html>
->>>>>>> 8a261bcf1a6ebc5cbebb680752460ae2a183b5c3
