@@ -94,12 +94,53 @@ router.post('/:org/:match/createroom',authenticationMiddleware(), async (req, re
         }
         else {
             console.log('Room Already Created')
+            res.redirect("/home/game/"+req.params.org+"/"+req.params.match+"")
         }
     })
     .catch(err => console.log(err));
 
 
 });
+
+
+router.get('/leaderboard/:id/listRooms',authenticationMiddleware(), async (req, res) => {
+
+    await Challenge.aggregate('roomID', 'DISTINCT', { plain: false, raw: true, where:{userID: req.params.id}})
+    .then( async ids => {
+        if(ids === undefined || ids.length == 0){         
+            roomids =[];
+            roomsBetOn =[]; 
+            res.redirect('/home'); 
+        }
+        else{
+            roomids =[];
+            roomsBetOn =[];  
+            ids.forEach(fixFormat2);
+            for(let i = 0; i < roomids.length; i++){
+                await Room.findAll({
+                    raw: true,
+                    attributes: ['roomID', 'Game', 'HostID', 'username'],
+                    where: {
+                        roomID: roomids[i]
+                    }
+                })
+                .then(rooms =>{
+                    if(rooms === undefined || rooms.length == 0){
+
+                    }
+                    else{
+                    roomsBetOn.push(rooms[i]);
+                    res.render('roomList.ejs', {roomList: roomsBetOn, user: req.user, type: 'other' })
+                    }
+                })
+                .catch(err => console.log(err));
+            }
+
+        }
+    })
+    .catch(err => console.log(err));
+});
+
 
 
 
@@ -151,11 +192,12 @@ router.post('/listMine',authenticationMiddleware(), async (req, res) => {
     .then(rooms =>{
         if((rooms === undefined || rooms.length == 0) && (roomsBetOn === undefined || roomsBetOn.length == 0)){ 
             console.log('no rooms made yet')
+            res.redirect('/home');
         }
         else {
             roomsBetOn = roomsBetOn.concat(rooms);
             console.log(roomsBetOn);
-            res.render('roomList.ejs', {roomList: roomsBetOn, user: req.user})
+            res.render('roomList.ejs', {roomList: roomsBetOn, user: req.user, type: 'mine'})
         }
     })
     .catch(err => console.log(err));
@@ -189,9 +231,11 @@ router.post('/:org/:match/listAll',authenticationMiddleware(), async (req, res) 
     })
     .then(async rooms =>{
         if(rooms === undefined || rooms.length == 0){ 
-            console.log('no rooms for that specific game')
+            console.log('no rooms for that specific game');
+            res.redirect("home/game/"+req.params.org+"/"+req.params.match+"");
         }
         else {
+            console.log(rooms)
            gameData =[];
            for(let i = 0; i < rooms.length; i++){
                 await Challenge.findAll({
@@ -210,7 +254,7 @@ router.post('/:org/:match/listAll',authenticationMiddleware(), async (req, res) 
                 })
                 .catch(err => console.log(err));
             }
-            res.render('roomList.ejs', {roomList: gameData, user: req.user})
+            res.render('roomList.ejs', {roomList: gameData, user: req.user,  type: 'general'})
         }
     })
     .catch(err => console.log(err));

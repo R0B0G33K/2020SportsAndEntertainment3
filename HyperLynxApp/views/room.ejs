@@ -2,26 +2,28 @@
 <%- include('./partials/head') %>
 <body>
     <%- include('./partials/navbarAuth') %>
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v7.0" nonce="4bgRGzCb"></script>
     <div class="container room">
         <div class="room-details">
                 <h3>Public Status: <%= status %></h3>
         </div>
         <h1><%= Game.split("_").join(" ") %></h1>
         <div class="game-on">
-            <figure>
-                <img src="/images/teams/<%=Org%>/<%=teams.team1%>.svg" alt="">
+            <figure class="teamLogo">
+                <img style="width: 100%;" src="/images/teams/<%=Org%>/<%=teams.team1%>.svg" alt="">
                 <figcaption></figcaption>
             </figure>
             <h3>VS</h3>
-            <figure>
-                <img src="/images/teams/<%=Org%>/<%=teams.team2%>.svg" alt="">
+            <figure class="teamLogo">
+                <img style="width: 100%;" src="/images/teams/<%=Org%>/<%=teams.team2%>.svg" alt="">
                 <figcaption></figcaption>
             </figure>
         </div>
 
         <div class="home">
             <h1 style="margin-bottom: 0;">Room details:</h1>
-            <p style="padding-bottom: 35px;">
+            <p style="padding-bottom: 30px;">
                 Make a prediction to start the room. Invite your friends to the room so
                 they can make a prediction. Competitors who make the right prediction
                 split the pool of points.
@@ -101,6 +103,48 @@
         <br />
         <% } %>
         </div>
+
+        <% if(listOfBets !== undefined || listOfBets.length > 0) { %>
+        <div id="share-buttons">
+    
+            <!-- Email -->
+            <div class='socialwidget'>
+            <a href="mailto:?subject=My%20Squareup-Sports%20Challenge%20Room&amp;body=%20http://www.squareup-sports.tech/room/<%= roomID %>">
+                <img src="/images/social/email.png" alt="Email" />
+            </a>
+            </div>
+         
+            <!-- Facebook -->
+            <div class='socialwidget'>
+            <a href="http://www.facebook.com/sharer.php?u=http://www.squareup-sports.tech/room/<%= roomID %>" target="_blank">
+                <img src="/images/social/facebook.png" alt="Facebook" />
+            </a>
+            </div>
+
+            <!-- Reddit -->
+            <div class='socialwidget'>
+            <a href="http://reddit.com/submit?url=http://www.squareup-sports.tech/room/<%= roomID %>&amp;title=My Squareup-Sports Challenge Room" target="_blank">
+                <img src="/images/social/reddit.png" alt="Reddit" />
+            </a>
+            </div>
+
+            <!-- Tumblr-->
+            <div class='socialwidget'>
+            <a href="http://www.tumblr.com/share/link?url=http://www.squareup-sports.tech/room/<%= roomID %>&amp;title=My Squareup-Sports Challenge Room" target="_blank">
+                <img src="/images/social/tumblr.png" alt="Tumblr" />
+            </a>
+            </div>
+             
+            <!-- Twitter -->
+            <div class='socialwidget'>
+            <a href="https://twitter.com/share?url=http://www.squareup-sports.tech/room/<%= roomID %>&amp;text=My%20Squareup-Sports%20Challenge%20Room&amp;hashtags=squareup" target="_blank">
+                <img src="/images/social/twitter.png" alt="Twitter" />
+            </a>
+            </div>
+            
+    
+        </div>
+        <% } %>
 
         <hr>
 

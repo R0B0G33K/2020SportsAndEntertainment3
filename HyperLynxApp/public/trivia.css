@@ -140,6 +140,8 @@ button:hover {
 nav {
   background: #222;
   padding: 0 15px;
+  position: relative;
+  z-index: 10;
 }
 
 nav a {
@@ -437,6 +439,7 @@ button:hover {
   display: flex;
   justify-content: space-between;
 }
+*/
 
 .game-on {
   display: flex;
@@ -444,12 +447,157 @@ button:hover {
   align-items: center;
 }
 
+.teamLogo{
+  width: 30%;
+  height: 30%;
+}
+
+/*
 figure {
   height: 100px;
   width: 100px;
 }
+/*
 
 img {
   height: 100%;
   width: 100%;
 } */
+
+
+#page {
+  box-sizing: border-box;
+  width: 80%;
+  text-align: center;
+  margin: auto;
+
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+.aboutColumn {
+  float: left;
+  width: 33.3%;
+  margin-bottom: 16px;
+  padding: 0 8px;
+}
+
+@media screen and (max-width: 650px) {
+  .aboutColumn {
+    width: 100%;
+    display: block;
+  }
+}
+
+.aboutCard {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.container-about {
+  padding: 0 15px;
+}
+
+.container-about::after, .aboutRow::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+
+.contactButton {
+  border: none;
+  outline: 0;
+  display: inline-block;
+  padding: 8px;
+  color: white;
+  background-color: #000;
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+}
+
+.contactButton:hover {
+  background-color: #555;
+}
+
+
+/* Share buttons from https://simplesharebuttons.com/html-share-buttons/ */
+#share-buttons{
+  text-align:center;
+  padding: 5px;
+  border: 0;
+  box-shadow: 0;
+  overflow: auto;
+  margin: auto;
+  width: 50%;
+}
+
+.socialwidget{
+  float: left;
+  padding: 5px;
+}
+
+
+/**/
+.TickerNews{
+	width: 100%;
+	height: 50px;
+	line-height: 48px;
+}
+.ti_wrapper{
+	width: 100%;
+	position: relative;
+	overflow: hidden;
+}
+.ti_slide{
+	width: 30000px;
+	position: relative;
+	left: 0;
+	top: 0;
+}
+.ti_content{
+	width: 8000px;
+	position: relative;
+	float:left;
+}
+.ti_news{
+	float:left;
+}
+.ti_news a{
+	display: block;
+	margin-right: 10px;
+	color:black;
+	text-decoration: none;
+	font-family: geneva;
+}
+
+
+.TickerNews.default_theme{
+	background-color: #f1f1f1;
+}
+
+.TickerNews.default_theme .ti_wrapper{
+	border:#CBCBCB solid 1px;
+	border-width: 1px 0;
+}
+
+.TickerNews.default_theme .ti_news a{
+	display: block;
+	margin-right: 10px;
+	color:#333;
+	text-transform: uppercase;
+	text-decoration: none;
+	font-family: geneva;
+}
+
+.TickerNews.default_theme .ti_news span{
+	color:red;
+	font-size: 110%;
+}
+
+#myPlayer{
+  font-weight: bolder;
+  background-color: lightyellow;
+}

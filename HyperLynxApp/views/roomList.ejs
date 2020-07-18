@@ -3,7 +3,22 @@
     <body>
         <%- include('./partials/navbarAuth') %>
         <div class="container">
-
+            <% var text = "";
+            switch (type) {
+                case 'other':
+                    text = "List of all rooms THEY are involved with";
+                    break;
+                case 'mine':
+                    text = "List of all rooms YOU are involved with";
+                    break;
+                case 'general':
+                    text = "List of public rooms for this game";
+                    break;
+                default:
+                    text = "ERROR";
+                    break;
+            }
+            %>
             <h1>Rooms</h1>
     
             <div class="container"> 

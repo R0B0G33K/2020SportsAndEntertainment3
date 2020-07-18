@@ -1,0 +1,38 @@
+<%- include('./partials/head') %>
+<%- include('./partials/navbarAuth') %>
+<form method="POST" action="/updateInfo">
+    <h1>Edit Account Info</h1>
+    <ul class="flex-outer">
+      <li>
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" value="<%=user.name%>" required/>
+      </li>
+      <li>
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username"  value="<%=user.username%>" required/>
+      </li>
+      <li>
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" value="<%=user.email%>" required/>
+      </li>
+      <li>
+        <label for="password">old Password</label>
+        <input type="password" id="oldpassword" name="oldpassword"/>
+      </li>
+      <li>
+            <label for="password">New Password</label>
+            <input type="password" id="newpassword" name="newpassword" />
+      </li>
+      <li>
+            <label for="passwordConfirm">Confirm New Password</label>
+            <input
+              type="password"
+              id="passwordConfirm"
+              name="passwordConfirm"
+            />
+      </li>
+      <li>
+            <button type="submit">commit changes</button>
+      </li>
+    </ul>
+</form>

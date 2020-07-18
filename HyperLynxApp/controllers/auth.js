@@ -15,7 +15,7 @@ exports.register = (req,res) => {
 
     const {name, username, email, password, passwordConfirm} = req.body;
 
-    db.query('SELECT email FROM users WHERE email = ?', [email], async (error, results) => {
+    db.query('SELECT email FROM users WHERE email = ? OR username = ?', [email, username], async (error, results) => {
         if(error){
             console.log(error);
             return;
@@ -23,7 +23,7 @@ exports.register = (req,res) => {
 
         if (results.length >0){
             return res.status(400).render('register.ejs', {
-                message: 'That email is already in use'
+                message: 'That email / screen name is already in use'
             });
         }
         else if(password !== passwordConfirm){

@@ -2,8 +2,9 @@
 
 <body>
     <%- include('./partials/navbarAuth') %>
+    <%- include('./partials/leaderboard') %>
     <div class="container home">
-
+        <br>
         <div class="flex">
             <h2>Points: <span><%= user.points %></span></h2>
         </div>
@@ -11,6 +12,7 @@
         <br>
 
         <h1>Welcome to home base.</h1>
+        <p>(If you came here from a room link, please go and reclick that link now)</p>
         <p>Create or join challenge rooms. This is where you predict sport outcomes against your friends to earn the most points. Remember, points earn you prizes!</p>
         <br>
         <p>Checkout the earn prizes tab to learn about other ways to earn points.</p>
@@ -22,7 +24,46 @@
         </form>
         <button class="button" id="ButtonOne" onclick="ShopLink">Prize Shop</button>
         <button class="button" id="ButtonTwo" onclick="FriendsLink">Friends</button>
-        <button class="button" id="ButtonTwo" onclick="SocialLink">Social</button>
+        <br>
+        <br>
+        <div id="share-buttons" style="position: sticky; bottom: 0px; display:inline-block; width: 100%;">
+    
+            <!-- Email -->
+            <div class='socialwidget'>
+            <a href="mailto:?subject=I%20have%20<%=user.points%>%20points%20on%20squareup-sports,%20can%20you%20beat%20that?&amp;body=%20http://www.squareup-sports.tech">
+                <img src="/images/social/email.png" alt="Email" />
+            </a>
+            </div>
+         
+            <!-- Facebook -->
+            <div class='socialwidget'>
+            <a href="http://www.facebook.com/sharer.php?u=http://www.squareup-sports.tech/" target="_blank">
+                <img src="/images/social/facebook.png" alt="Facebook" />
+            </a>
+            </div>
+
+            <!-- Reddit -->
+            <div class='socialwidget'>
+            <a href="http://reddit.com/submit?url=http://www.squareup-sports.tech&amp;title=My Squareup-Sports Score is <%=user.point%>" target="_blank">
+                <img src="/images/social/reddit.png" alt="Reddit" />
+            </a>
+            </div>
+
+            <!-- Tumblr-->
+            <div class='socialwidget'>
+            <a href="http://www.tumblr.com/share/link?url=http://www.squareup-sports.tech&amp;title=My Squareup-Sports Score is <%=user.point%>" target="_blank">
+                <img src="/images/social/tumblr.png" alt="Tumblr" />
+            </a>
+            </div>
+             
+            <!-- Twitter -->
+            <div class='socialwidget'>
+            <a href="https://twitter.com/share?url=http://www.squareup-sports.tech&amp;text=I%20have%20<%=user.points%>%20points%20on%20squareup-sports,%20can%20you%20beat%20that?&amp;hashtags=squareup" target="_blank">
+                <img src="/images/social/twitter.png" alt="Twitter" />
+            </a>
+            </div>
+    
+        </div>
     
         </div>
 </body>

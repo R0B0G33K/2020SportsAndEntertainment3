@@ -1,0 +1,38 @@
+<!--https://www.jqueryscript.net/animation/Infinite-News-Ticker-Plugin-with-jQuery-tickerNews.html-->
+<div class="TickerNews default_theme" id="T2">
+    <div class="ti_wrapper">
+        <div class="ti_slide">
+            <div class="ti_content">
+                <div class="ti_news"><a href="#"><span>TOP SCORES: </span></a></div>
+                <% for(let i = 0; i < curleader.length; i++) { %>
+                    <% var text = ""; var special = "other";
+                    switch ((i+1)%10){
+                        case 1:
+                            text = "st";
+                            break;
+                        case 2:
+                            text = "nd";
+                            break;
+                        case 3:
+                            text = "rd";
+                            break;
+                        default:
+                            text = "th";
+                    }
+                    if (curleader[i].id == user.id) {
+                        special = "my";
+                    }
+                    %>
+                <div class="ti_news" id="<%=special%>Player" ><a href="<%if(special == "my"){%>/home<%} else {%>/home/game/leaderboard/<%=curleader[i].id%>/listRooms<%}%>"><span><%=i+1%><%=text%> place:</span> <%= curleader[i].username%> with <%=curleader[i].points%> points </a></div>
+                <%}%>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+<script src="/libs/jquery.tickerNews.min.js"></script>
+<script type="text/javascript">
+    $(function(){
+        _Ticker = $(".TickerNews").newsTicker();
+    });
+</script>
