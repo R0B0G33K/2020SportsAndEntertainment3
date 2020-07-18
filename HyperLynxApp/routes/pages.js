@@ -87,7 +87,7 @@ router.get('/home', authenticationMiddleware(), async (req, res) => {
 			req.user.email = results[0].email;
 			req.user.name = results[0].name;
 			req.user.password = results[0].password;
-            res.render('home.ejs', {user: req.user, curleader: curLeaders});
+            res.render('home.ejs', {user: req.user, curleader: curLeaders, message: req.flash('error')});
 		}
 	});
 });

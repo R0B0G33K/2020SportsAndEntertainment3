@@ -2,9 +2,9 @@
 <%- include('./partials/head') %>
 <body>
     <%- include('./partials/navbarAuth') %>
-    <div id="fb-root"></div>
-    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v7.0" nonce="4bgRGzCb"></script>
+    
     <div class="container room">
+        <p class="error"><%=message%></p>
         <div class="room-details">
                 <h3>Public Status: <%= status %></h3>
         </div>
@@ -128,7 +128,6 @@
             </a>
             </div>
 
-
             <!-- Tumblr-->
             <div class='socialwidget'>
             <a href="http://www.tumblr.com/share/link?url=http://www.squareup-sports.tech/room/<%= roomID %>&amp;title=My Squareup-Sports Challenge Room" target="_blank">
@@ -143,7 +142,6 @@
             </a>
             </div>
             
-
     
         </div>
         <% } %>

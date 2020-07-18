@@ -62,7 +62,7 @@ router.get('/:org/:match',authenticationMiddleware(),(req, res) => {
     if(!(games.some(checkMatching))){
         return res.redirect('/home/game')
     }
-    res.render('create-game.ejs', {orgName: req.params.org, matchName: req.params.match, type: 'game',user: req.user});
+    res.render('create-game.ejs', {orgName: req.params.org, matchName: req.params.match, type: 'game',user: req.user, message: req.flash('error')});
 });
 
 router.post('/:org/:match/createroom',authenticationMiddleware(), async (req, res) => {
@@ -93,7 +93,8 @@ router.post('/:org/:match/createroom',authenticationMiddleware(), async (req, re
             res.redirect('/room/'+tempRoomID.toString()+"");
         }
         else {
-            console.log('Room Already Created')
+            console.log('Room Already Created') 
+            req.flash('error', 'You have already created a room for that game!');
             res.redirect("/home/game/"+req.params.org+"/"+req.params.match+"")
         }
     })
@@ -110,6 +111,7 @@ router.get('/leaderboard/:id/listRooms',authenticationMiddleware(), async (req, 
         if(ids === undefined || ids.length == 0){         
             roomids =[];
             roomsBetOn =[]; 
+            req.flash('error', 'That user is not currently in any challenge room!');
             res.redirect('/home'); 
         }
         else{
@@ -192,6 +194,7 @@ router.post('/listMine',authenticationMiddleware(), async (req, res) => {
     .then(rooms =>{
         if((rooms === undefined || rooms.length == 0) && (roomsBetOn === undefined || roomsBetOn.length == 0)){ 
             console.log('no rooms made yet')
+            req.flash('error', 'You are not currently in any challenge room!');
             res.redirect('/home');
         }
         else {
@@ -232,6 +235,7 @@ router.post('/:org/:match/listAll',authenticationMiddleware(), async (req, res) 
     .then(async rooms =>{
         if(rooms === undefined || rooms.length == 0){ 
             console.log('no rooms for that specific game');
+            req.flash('error', 'There are no public rooms yet for that game!');
             res.redirect("home/game/"+req.params.org+"/"+req.params.match+"");
         }
         else {

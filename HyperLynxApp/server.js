@@ -14,12 +14,13 @@ const path = require('path');
 const mysql = require('mysql');
 const dotenv = require('dotenv');
 const cookieParser = require('cookie-parser');
+const flash = require('connect-flash');
 //Authentication Packages
 const session = require('express-session');
 const passport = require('passport');
 const MySQLStore = require('express-mysql-session')(session); 
 //Sequelize DB
-const sequelize = require('./config/database')
+const sequelize = require('./config/database');
 
 let app = express();
 
@@ -79,6 +80,7 @@ app.use(session({
     store:sessionStore,
     saveUninitialized: false
 }));
+app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 

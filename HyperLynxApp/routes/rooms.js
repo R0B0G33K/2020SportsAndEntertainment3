@@ -49,6 +49,8 @@ router.post('/:roomID/:betID/joinBet',authenticationMiddleware(), async (req, re
 		}
 		else{
 			console.log('user already there');
+			req.flash('error', 'You are not currently in any challenge room!');
+			res.redirect('/room/'+req.params.roomID+"");
 		}
     })
 	.catch(err => console.log(err));	
@@ -171,7 +173,7 @@ router.get('/:roomID', authenticationMiddleware(), async (req, res) => {
 				}
 			})
 			.then(matches =>{
-				res.render('room.ejs', {HostID: rooms[0].HostID, user: req.user, Org: rooms[0].Org, Game: rooms[0].Game, status: rooms[0].Public, roomID: req.params.roomID, listOfBets: roomChallenges, listOfBetID: uniqueBetID, teams: matches[0]});
+				res.render('room.ejs', {HostID: rooms[0].HostID, user: req.user, message: req.flash('error'), Org: rooms[0].Org, Game: rooms[0].Game, status: rooms[0].Public, roomID: req.params.roomID, listOfBets: roomChallenges, listOfBetID: uniqueBetID, teams: matches[0]});
 
 			})
 			.catch(err => console.log(err));
