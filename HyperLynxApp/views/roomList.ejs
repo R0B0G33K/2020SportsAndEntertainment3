@@ -1,27 +1,32 @@
 <!DOCTYPE html>
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>pick a sport</title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-
-        <!-- Google Font  -->
-        <link href="https://fonts.googleapis.com/css2?family=Rubik&display=swap" rel="stylesheet">
-
-        <link rel="stylesheet" href="/trivia.css">
-    </head>
+<%- include('./partials/head') %>
     <body>
-
+        <%- include('./partials/navbarAuth') %>
         <div class="container">
-            <a href="/back"><h1>Home</h1></a>
-
+            <% var text = "";
+            switch (type) {
+                case 'other':
+                    text = "List of all rooms THEY are involved with";
+                    break;
+                case 'mine':
+                    text = "List of all rooms YOU are involved with";
+                    break;
+                case 'general':
+                    text = "List of public rooms for this game";
+                    break;
+                default:
+                    text = "ERROR";
+                    break;
+            }
+            %>
             <h1>Rooms</h1>
     
             <div class="container"> 
+                <ul class="flex-outer">
                 <% for(let i = 0; i < roomList.length; i++) { %>
-                    <button class="button" id="button" value="<%= roomList[i].roomID %>"><%= roomList[i].Game.split("_").join(" ")%> made by User: <%= roomList[i].username%></button>
+                    <li><button class="button" id="button" value="<%= roomList[i].roomID %>"><%= roomList[i].Game.split("_").join(" ")%> made by User: <%= roomList[i].username%></button></li>
                 <% } %>
+                </ul>
             </div>
         </div>
         

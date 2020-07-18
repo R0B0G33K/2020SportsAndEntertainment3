@@ -1,35 +1,38 @@
+<!DOCTYPE html>
 <%- include('./partials/head') %>
-
-<body>
-
-    <%- include('./partials/navbar') %>
-
-    <div class="container home">
+    <body>
+        <%- include('./partials/navbarAuth') %>
+        <div class="container home">
 
 
-        <h1>Choose an upcoming event.</h1>
+            <h1>Choose an upcoming event.</h1>
+    
+            <div class="container"> 
+                <ul class="flex-outer">
+                <% for(let i = 0; i < gameList.length; i++) { %>
+                    <li><button class="button" id="button"><%= gameList[i].split("_").join(" ") %></button></li>
+                <% } %>
+                </ul>
+            </div>
 
-        <div class="containers"> 
-            <% for(let i = 0; i < gameList.length; i++) { %>
-                <button class="button" id="button"><%= gameList[i] %></button>
-            <% } %>
         </div>
-    </div>
-    
-
-    
-    <script>
-        var buttons = document.getElementsByTagName('button');
-        for(var i=0, len = buttons.length; i < len; i++){
-            buttons[i].onclick= function (){
-                clickFunction (this);
+        
+        
+        <script>
+            var buttons = document.getElementsByTagName('button');
+            for(var i=0, len = buttons.length; i < len; i++){
+                buttons[i].onclick= function (){
+                    clickFunction (this);
+                }
             }
-        }
 
-        function clickFunction(elmnt){
-            var game = elmnt.innerHTML;
-            game = game.split(" ").join("");
-            location.href = "/home/<%= type %>/<%= orgName %>/"+game+"";
-        };                   
-    </script>
-</body>
+
+            function clickFunction(elmnt){
+                var game = elmnt.innerHTML;
+                game = game.split(" ").join("_");
+                location.href = "/home/<%= type %>/<%= orgName %>/"+game+"";
+            };                   
+        </script>
+    </body>
+</html>
+

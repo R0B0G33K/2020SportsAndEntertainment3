@@ -29,31 +29,14 @@ h1 {
     padding: 15px 0 20px;
 }
 
-h2 {
-    margin: 10px 20px 10px 0;
-    font-weight: 600;
-}
-
-.room h2 {
-    padding-bottom: 15px;
-}
-
 .start h2, .start a {
     text-decoration: none;
     text-align: center;
     margin: 20px;
 }
 
-h2 span {
-    font-weight: 300;
-}
 
 
-.flex {
-    display: flex;
-    justify-content: start;
-    flex-flow: row wrap;
-}
 
 
 
@@ -157,6 +140,8 @@ button:hover {
 nav {
   background: #222;
   padding: 0 15px;
+  position: relative;
+  z-index: 10;
 }
 
 nav a {
@@ -369,8 +354,8 @@ nav a {
 
 
 
-
-.home .button {
+/* 
+.button {
   margin: 4px 2px;
   padding: 15px 32px;
   width: 100%;
@@ -380,26 +365,15 @@ nav a {
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 36px;
+  font-size: 16px;
   cursor: pointer;
-  font-family: 'Montserrat', sans-serif;
 }
 
-.home button:hover {
+button:hover {
   background-color: #3726a6;
   transition: 0.75s;
 }
-
-.home form {
-    padding: 0;
-}
-
-.home p {
-    font-size: 24px;
-    padding-bottom: 15px;
-}
-
-
+*/
 
 #timer {
   display: flex;
@@ -459,10 +433,13 @@ nav a {
   font-size: 2em;
 }
 
+/*
+
 .room-details {
   display: flex;
   justify-content: space-between;
 }
+*/
 
 .game-on {
   display: flex;
@@ -470,27 +447,159 @@ nav a {
   align-items: center;
 }
 
-.room table {
-    border: 5px solid black;
-    border-collapse: collapse;
+.teamLogo{
+  width: 30%;
+  height: 30%;
+}
+
+/*
+figure {
+  height: 100px;
+  width: 100px;
+}
+/*
+
+img {
+  height: 100%;
+  width: 100%;
+} */
+
+
+#page {
+  box-sizing: border-box;
+  width: 80%;
+  text-align: center;
+  margin: auto;
+
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+.aboutColumn {
+  float: left;
+  width: 33.3%;
+  margin-bottom: 16px;
+  padding: 0 8px;
+}
+
+@media screen and (max-width: 650px) {
+  .aboutColumn {
     width: 100%;
-    font-size: 20px;
-    margin-bottom: 20px;
+    display: block;
+  }
 }
 
-.room th, .room td {
-    border: 3px solid black;
-    text-align: center;
-}
-.room form {
-    padding: 0;
+.aboutCard {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
 
-.room select {
-    font-size: 24px;
-    min-width: 250px;
-    background-color: rgb(232, 240, 254); 
-    font-family: 'Montserrat', sans-serif;
+.container-about {
+  padding: 0 15px;
 }
 
+.container-about::after, .aboutRow::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+
+.contactButton {
+  border: none;
+  outline: 0;
+  display: inline-block;
+  padding: 8px;
+  color: white;
+  background-color: #000;
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+}
+
+.contactButton:hover {
+  background-color: #555;
+}
+
+
+/* Share buttons from https://simplesharebuttons.com/html-share-buttons/ */
+#share-buttons{
+  text-align:center;
+  padding: 5px;
+  border: 0;
+  box-shadow: 0;
+  overflow: auto;
+  margin: auto;
+  width: 50%;
+}
+
+.socialwidget{
+  float: left;
+  padding: 5px;
+}
+
+
+/**/
+.TickerNews{
+	width: 100%;
+	height: 50px;
+	line-height: 48px;
+}
+.ti_wrapper{
+	width: 100%;
+	position: relative;
+	overflow: hidden;
+}
+.ti_slide{
+	width: 30000px;
+	position: relative;
+	left: 0;
+	top: 0;
+}
+.ti_content{
+	width: 8000px;
+	position: relative;
+	float:left;
+}
+.ti_news{
+	float:left;
+}
+.ti_news a{
+	display: block;
+	margin-right: 10px;
+	color:black;
+	text-decoration: none;
+	font-family: geneva;
+}
+
+
+.TickerNews.default_theme{
+	background-color: #f1f1f1;
+}
+
+.TickerNews.default_theme .ti_wrapper{
+	border:#CBCBCB solid 1px;
+	border-width: 1px 0;
+}
+
+.TickerNews.default_theme .ti_news a{
+	display: block;
+	margin-right: 10px;
+	color:#333;
+	text-transform: uppercase;
+	text-decoration: none;
+	font-family: geneva;
+}
+
+.TickerNews.default_theme .ti_news span{
+	color:red;
+	font-size: 110%;
+}
+
+
+#myPlayer{
+  font-weight: bolder;
+  background-color: lightyellow;
+}
 

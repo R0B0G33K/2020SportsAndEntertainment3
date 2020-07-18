@@ -24,7 +24,7 @@ router.get('/',authenticationMiddleware(), async (req, res) => {
             //put into orgs
         })
         .catch(err => console.log(err));
-        res.render('pick-sport.ejs',{type: 'game', sportsAv: orgs});
+        res.render('pick-sport.ejs',{type: 'game', sportsAv: orgs, user: req.user});
 });
 
 
@@ -49,7 +49,7 @@ router.get('/:org',authenticationMiddleware(), async (req, res) => {
     })
     .catch(err => console.log(err));
 
-    res.render('upcomingGames.ejs', {orgName: req.params.org, gameList: games, type: 'game'});
+    res.render('upcomingGames.ejs', {orgName: req.params.org, gameList: games, type: 'game', user: req.user});
 });
 
 router.get('/:org/:match',authenticationMiddleware(),(req, res) => {
@@ -62,7 +62,7 @@ router.get('/:org/:match',authenticationMiddleware(),(req, res) => {
     if(!(games.some(checkMatching))){
         return res.redirect('/home/game')
     }
-    res.render('create-game.ejs', {orgName: req.params.org, matchName: req.params.match, type: 'game'});
+    res.render('create-game.ejs', {orgName: req.params.org, matchName: req.params.match, type: 'game',user: req.user});
 });
 
 router.post('/:org/:match/createroom',authenticationMiddleware(), async (req, res) => {
@@ -94,12 +94,53 @@ router.post('/:org/:match/createroom',authenticationMiddleware(), async (req, re
         }
         else {
             console.log('Room Already Created')
+            res.redirect("/home/game/"+req.params.org+"/"+req.params.match+"")
         }
     })
     .catch(err => console.log(err));
 
 
 });
+
+
+router.get('/leaderboard/:id/listRooms',authenticationMiddleware(), async (req, res) => {
+
+    await Challenge.aggregate('roomID', 'DISTINCT', { plain: false, raw: true, where:{userID: req.params.id}})
+    .then( async ids => {
+        if(ids === undefined || ids.length == 0){         
+            roomids =[];
+            roomsBetOn =[]; 
+            res.redirect('/home'); 
+        }
+        else{
+            roomids =[];
+            roomsBetOn =[];  
+            ids.forEach(fixFormat2);
+            for(let i = 0; i < roomids.length; i++){
+                await Room.findAll({
+                    raw: true,
+                    attributes: ['roomID', 'Game', 'HostID', 'username'],
+                    where: {
+                        roomID: roomids[i]
+                    }
+                })
+                .then(rooms =>{
+                    if(rooms === undefined || rooms.length == 0){
+
+                    }
+                    else{
+                    roomsBetOn.push(rooms[i]);
+                    res.render('roomList.ejs', {roomList: roomsBetOn, user: req.user, type: 'other' })
+                    }
+                })
+                .catch(err => console.log(err));
+            }
+
+        }
+    })
+    .catch(err => console.log(err));
+});
+
 
 
 
@@ -151,11 +192,12 @@ router.post('/listMine',authenticationMiddleware(), async (req, res) => {
     .then(rooms =>{
         if((rooms === undefined || rooms.length == 0) && (roomsBetOn === undefined || roomsBetOn.length == 0)){ 
             console.log('no rooms made yet')
+            res.redirect('/home');
         }
         else {
             roomsBetOn = roomsBetOn.concat(rooms);
             console.log(roomsBetOn);
-            res.render('roomList.ejs', {roomList: roomsBetOn})
+            res.render('roomList.ejs', {roomList: roomsBetOn, user: req.user, type: 'mine'})
         }
     })
     .catch(err => console.log(err));
@@ -189,9 +231,11 @@ router.post('/:org/:match/listAll',authenticationMiddleware(), async (req, res) 
     })
     .then(async rooms =>{
         if(rooms === undefined || rooms.length == 0){ 
-            console.log('no rooms for that specific game')
+            console.log('no rooms for that specific game');
+            res.redirect("home/game/"+req.params.org+"/"+req.params.match+"");
         }
         else {
+            console.log(rooms)
            gameData =[];
            for(let i = 0; i < rooms.length; i++){
                 await Challenge.findAll({
@@ -210,7 +254,7 @@ router.post('/:org/:match/listAll',authenticationMiddleware(), async (req, res) 
                 })
                 .catch(err => console.log(err));
             }
-            res.render('roomList.ejs', {roomList: gameData})
+            res.render('roomList.ejs', {roomList: gameData, user: req.user,  type: 'general'})
         }
     })
     .catch(err => console.log(err));

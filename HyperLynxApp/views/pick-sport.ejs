@@ -1,36 +1,36 @@
-
+<!DOCTYPE html>
 <%- include('./partials/head') %>
+    <body>
+        <%- include('./partials/navbarAuth') %>
+        <div class="container home">
 
-<body>
+            <h1>Choose a Sport</h1>
+            <ul class="flex-outer">
+            <% for(let i = 0; i < sportsAv.length; i++) { %>
+                <li><button class="button" id="button"><%= sportsAv[i].split("_").join(" ") %></button></li>
+            <% } %>
+            </ul>
 
-    <%- include('./partials/navbar') %>
+        </div>
+        
 
-    <div class="container home">
-
-
-        <h1>Choose a sport to start a <%= type %>.</h1>
 
         
-        <% for(let i = 0; i < sportsAv.length; i++) { %>
-            <button class="button" id="button"><%= sportsAv[i] %></button>
-        <% } %>
-        
-    </div>
-    
-
-    
-    <script>
-        var buttons = document.getElementsByTagName('button');
-        for(var i=0, len = buttons.length; i < len; i++){
-            buttons[i].onclick= function (){
-                clickFunction (this);
+        <script>
+            var buttons = document.getElementsByTagName('button');
+            for(var i=0, len = buttons.length; i < len; i++){
+                buttons[i].onclick= function (){
+                    clickFunction (this);
+                }
             }
-        }
 
-        function clickFunction(elmnt) {
-            var sportName = elmnt.innerHTML;
-            sportName = sportName.split(" ").join("");
-            location.href = "/home/<%= type %>/"+sportName+"";
-        };            
-    </script>
-</body>
+
+            function clickFunction(elmnt) {
+                var sportName = elmnt.innerHTML;
+                sportName = sportName.split(" ").join("_");
+                location.href = "/home/<%= type %>/"+sportName+"";
+            };            
+        </script>
+    </body>
+</html>
+

@@ -1,28 +1,26 @@
-
-
+<!DOCTYPE html>
 <%- include('./partials/head') %>
-
-<body>
-    <%- include('./partials/navbar') %>
-
-    <div class="container home">
+    <body>
+        <%- include('./partials/navbarAuth') %>
+        <div class="container home">
 
 
-        <h1>Deep breath...go with your gut.</h1>
-
-        <div class="containers"> 
-            <form method="POST" action="/home/game/<%= orgName %>/<%= matchName %>/createroom">
-            <button class="button" id="button" type="submit">Create your own game room</button>
-            </form>
-            <form method="POST" action="/home/game/<%= orgName %>/<%= matchName %>/listAll">
-            <button class="button" id="button">Join existing game room</button>
-            </form>
+            <h1>Deep breath...go with your gut.</h1>
+    
+            <div class="containers"> 
+                <form method="POST" action="/home/game/<%= orgName %>/<%= matchName %>/createroom">
+                <button class="button" id="button" type="submit">Create your own game room</button>
+                </form>
+                <form method="POST" action="/home/game/<%= orgName %>/<%= matchName %>/listAll">
+                <button class="button" id="button">Join existing game room</button>
+                </form>
+            </div>
         </div>
-    </div>
-    
+        
 
-    
-    <script>
-            
-    </script>
-</body>
+        
+        <script>
+                
+        </script>
+    </body>
+</html>
