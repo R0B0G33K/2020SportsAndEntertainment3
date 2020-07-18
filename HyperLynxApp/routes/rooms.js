@@ -174,6 +174,7 @@ router.get('/:roomID', authenticationMiddleware(), async (req, res) => {
 			})
 			.then(matches =>{
 				res.render('room.ejs', {HostID: rooms[0].HostID, user: req.user, message: req.flash('error'), Org: rooms[0].Org, Game: rooms[0].Game, status: rooms[0].Public, roomID: req.params.roomID, listOfBets: roomChallenges, listOfBetID: uniqueBetID, teams: matches[0]});
+				roomChallenges =[];
 
 			})
 			.catch(err => console.log(err));

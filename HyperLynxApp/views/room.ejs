@@ -30,7 +30,8 @@
             </p>
         </div>
         
-        <% if(listOfBets !== undefined || listOfBets.length > 0) { %>
+        <% var textadd = "a"; 
+        if(listOfBets.length != 0) { textadd = "another"; %>
         <% for(let i = 0; i < listOfBetID.length; i++) { %>
         <% var betID = listOfBetID[i];%>
         <% var pool = 0;%>
@@ -76,7 +77,7 @@
 
         <div class="container"> 
         <% if(user.id == HostID) { %>
-        <h2 style="margin-top: 100px;">Add a challenge to the room</h2>
+        <h2 style="margin-top: 100px;">Add <%=textadd%> challenge to the room</h2>
         <form method="POST" action="/room/<%= roomID %>/postChallenge">
             <ul class="flex-outer">
                 <li>
@@ -104,7 +105,7 @@
         <% } %>
         </div>
 
-        <% if(listOfBets !== undefined || listOfBets.length > 0) { %>
+        <% if(listOfBets.length != 0) { console.log(listOfBets.length) %>
         <div id="share-buttons">
     
             <!-- Email -->
