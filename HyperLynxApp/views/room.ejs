@@ -59,6 +59,7 @@
             </table>
             <h3 style="margin-bottom: 2.5em;">Pool: <%= pool %></h3>
         </div>
+        <%if(!(user.id == HostID)){%>
         <form style="padding: 0;" method="POST" action="/room/<%= roomID %>/<%=betID %>/joinBet">
             <ul class="flex-outer">
             <input type="hidden" id="wager" name="wager" value =<%=found.wager%>>
@@ -72,6 +73,21 @@
             </li>
         </ul>
         </form>
+        <% } else{%>
+         <form style="padding: 0;" method="POST" action="/room/<%= roomID %>/<%=betID %>/cancelBet">
+            <ul class="flex-outer">
+            <input type="hidden" id="wager" name="wager" value =<%=found.wager%>>
+            <input type="hidden" id="type" name="type" value =<%=found.type%>>
+            <input type="hidden" id="HostID" name="HostID" value =<%=HostID%>>
+            <input type="hidden" id="Org" name="Org" value =<%=Org%>> 
+            <input type="hidden" id="Game" name="Game" value =<%=Game%>>   
+            <li>
+                <button class="button" type="submit">Cancel Bet</button>
+            </li>
+        </ul>
+        </form>
+        
+        <% } %>
         <% } %>
         <% } %>
 
@@ -82,10 +98,20 @@
             <ul class="flex-outer">
                 <li>
                     <select id="challenge" name="challenge">
-                        <option value="coinflip">Coin Flip</option>
-                        <option value="winner">Winner</option>
+                        <%switch(Org){
+                            case 'NFL':%>
+                            <option value="coinflip">Coin Toss</option>
+                            <option value="ftst">First Team to Score a Touchdown</option>
+                            <option value="ftsfg">First Team to Score a Field Goal</option>
+                            <%break;
+                            case 'WNBA':%>
+                            <option value="tmt">Team with most Three Pointers</option>
+                            <option value="pmp">Player with most Points</option>
+                            <option value="pmfs">Player with most Foul Shots</option>
+                            <%break;
+                        }%>
                         <option value="pointSpread">Point Spread</option>
-                        <option value="mostAssists">Most Assists</option>
+                        <option value="OverUnder">Over Under</option>
                     </select>
                 </li>
                 <li>
