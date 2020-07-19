@@ -4,6 +4,7 @@
     <%- include('./partials/navbarAuth') %>
     <%- include('./partials/leaderboard') %>
     <div class="container home">
+        <br>
         <p class="error"><%=message%></p>
         <br>
         <div class="flex">
@@ -16,15 +17,14 @@
         <p>(If you came here from a room link, please go and reclick that link now)</p>
         <p>Create or join challenge rooms. This is where you predict sport outcomes against your friends to earn the most points. Remember, points earn you prizes!</p>
         <br>
-        <p>Checkout the earn prizes tab to learn about other ways to earn points.</p>
+        <p>Click on prize shop button too see what prizes await!</p>
         <br>
         <br>
     
         <form method="POST" action="/home/game/listMine" style="display: inline;">
             <button type="submit" class="button" id="myRooms">Games in progress</button>
         </form>
-        <button class="button" id="ButtonOne" onclick="ShopLink">Prize Shop</button>
-        <button class="button" id="ButtonTwo" onclick="FriendsLink">Friends</button>
+        <button class="buttonHome" id="ButtonOne" onclick="ShopLink">Prize Shop</button>
         <br>
         <br>
         <div id="share-buttons" style="position: sticky; bottom: 0px; display:inline-block; width: 100%;">
@@ -63,6 +63,13 @@
                 <img src="/images/social/twitter.png" alt="Twitter" />
             </a>
             </div>
+
+            <div class='socialwidget'>
+                <a href="https://www.instagram.com/squareup_sports/" target="_blank">
+                <img src="/images/social/instagram.png" alt="Instagram" />
+            </a>
+            </div>
+        
     
         </div>
     

@@ -76,6 +76,21 @@ router.post('/:org/:match/createroom',authenticationMiddleware(), async (req, re
         return res.redirect('/home/game')
     }
 
+    var matchDate;
+    await Match.findAll({
+        raw: true,
+        attributes: ['date'],
+        where: {
+            sport: req.params.org,
+            match: req.params.match
+        }
+    })
+    .then(matches =>{
+        matchDate = matches[0].date;
+    })
+    .catch(err => console.log(err));
+
+
     var tempRoomID = randomValueBase64();
     userElement = null;
 
@@ -89,13 +104,16 @@ router.post('/:org/:match/createroom',authenticationMiddleware(), async (req, re
     })
     .then(rooms =>{
         if(rooms === undefined || rooms.length == 0){ 
-            CreateRoom(tempRoomID,req.user.id,req.params.org,req.params.match, req.user.username);
+            var isTrueSet = ('true' === req.body.publicStatus);
+            CreateRoom(tempRoomID,req.user.id,req.params.org,req.params.match, req.user.username, isTrueSet, matchDate);
             res.redirect('/room/'+tempRoomID.toString()+"");
+            matchDate = null;
         }
         else {
             console.log('Room Already Created') 
             req.flash('error', 'You have already created a room for that game!');
             res.redirect("/home/game/"+req.params.org+"/"+req.params.match+"")
+            matchDate = null;
         }
     })
     .catch(err => console.log(err));
@@ -301,14 +319,14 @@ function randomValueBase64(){
         .replace(/\//g, '0')
 }
 
-async function CreateRoom(tempRoomID, id, org, match, username){
+async function CreateRoom(tempRoomID, id, org, match, username, trueset, date){
     const newRoom = await Room.create({
         roomID: tempRoomID,
         HostID: id,
         Org: org,
         Game: match,
-        Public: true,
-        ExpireDate: '2020-12-28',
+        Public: trueset,
+        ExpireDate: date,
         username: username
     });  
 }

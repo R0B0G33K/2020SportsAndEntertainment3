@@ -3,15 +3,22 @@
     <body>
         <%- include('./partials/navbarAuth') %>
         <div class="container home">
+            <br>
             <p class="error"><%=message%></p>
-            <h1>Deep breath...go with your gut.</h1>
+            <br>
+            <h1 style="text-align: center;">Deep breath...go with your gut.</h1>
     
             <div class="containers"> 
                 <form method="POST" action="/home/game/<%= orgName %>/<%= matchName %>/createroom">
-                <button class="button" id="button" type="submit">Create your own game room</button>
+                <button class="button" style="width: 100%;" id="button" type="submit">Create your own game room</button>
+                <select class="selectChallenge" style="text-align: center;" id="publicStatus" name="publicStatus">
+                    <option value='true'>Public</option>
+                    <option value='false'>Private</option>
+                </select>
                 </form>
+                <br>
                 <form method="POST" action="/home/game/<%= orgName %>/<%= matchName %>/listAll">
-                <button class="button" id="button">Join existing game room</button>
+                <button class="button" style="width: 100%;" id="button">Join existing game room</button>
                 </form>
             </div>
         </div>

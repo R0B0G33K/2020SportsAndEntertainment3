@@ -4,9 +4,15 @@
     <%- include('./partials/navbarAuth') %>
     
     <div class="container room">
+        <br>
         <p class="error"><%=message%></p>
+        <br>
         <div class="room-details">
-                <h3>Public Status: <%= status %></h3>
+            <%if(status == 0){%>
+                <h3>Private</h3>
+            <%} else {%>
+                <h3>Public</h3>
+            <%}%>
         </div>
         <h1><%= Game.split("_").join(" ") %></h1>
         <div class="game-on">
@@ -36,6 +42,9 @@
         <% var betID = listOfBetID[i];%>
         <% var pool = 0;%>
         <% var found = listOfBets.find(element => element.bettingID == betID) %>
+        <%if(i != 0){%>
+            <br>
+        <%}%>
         <div style="display: flex; justify-content: space-between;">
             <h3><%= found.type %> Challenge!</h3>
             <h3>Wager: <%= found.wager %></h3>
@@ -93,11 +102,11 @@
 
         <div class="container"> 
         <% if(user.id == HostID) { %>
-        <h2 style="margin-top: 100px;">Add <%=textadd%> challenge to the room</h2>
+        <h2 style="margin-top: 100px; text-align: center; padding-bottom: 1%;">Add <%=textadd%> challenge to the room</h2>
         <form method="POST" action="/room/<%= roomID %>/postChallenge">
             <ul class="flex-outer">
                 <li>
-                    <select id="challenge" name="challenge">
+                    <select class="selectChallenge" id="challenge" name="challenge">
                         <%switch(Org){
                             case 'NFL':%>
                             <option value="coinflip">Coin Toss</option>
@@ -115,7 +124,7 @@
                     </select>
                 </li>
                 <li>
-                    <label for="wager">Set a wager amount for challenge!</label>
+                    <label for="wager">Set a wager amount for the challenge!</label>
                     <input type="number" id="wager" name="wager" min="5" max="1000">
                 </li>
                 <li>
@@ -177,7 +186,7 @@
 
         <div class="container"> 
             <% if(user.id == HostID) { %>
-                <form method="POST" action="/room/delete">
+                <form method="POST" onsubmit="return confirm('Do you really want to delete this room?');" action="/room/delete">
                     <ul class="flex-outer" >
                         <input type="hidden" id="HostID" name="HostID" value =<%=HostID%>>
                         <input type="hidden" id="Org" name="Org" value =<%=Org%>> 
