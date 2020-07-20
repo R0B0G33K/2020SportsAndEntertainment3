@@ -633,3 +633,18 @@ img {
   font-weight: bolder;
   background-color: lightyellow;
 }
+
+.prize-button {
+    max-width: 100px;
+    margin: 5px 0 25px 0;
+}
+
+.prize {
+    width: 100%;
+    text-align: center;
+    padding: 10px 0;
+}
+
+.prize-image {
+    max-width: 200px;
+}

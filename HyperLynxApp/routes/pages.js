@@ -103,6 +103,17 @@ router.get('/about', (req, res) => {
 
 });
 
+router.get('/prizes', (req, res) => {
+	req.session.touch();
+	if(req.user != undefined){
+		res.render('prizes.ejs',{isUser: true, user: req.user});
+	}
+	else{
+		res.render('prizes.ejs',{isUser: false});
+	}
+
+});
+
 router.get('/account', authenticationMiddleware(), (req, res) => {
 	req.session.touch();
 
