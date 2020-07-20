@@ -121,9 +121,11 @@ function updateDB(unfixedUser){
 	db.query('UPDATE users SET points = ? WHERE id = ?', 
 	[unfixedUser.points, unfixedUser.id], (error, results) =>{
 		if(error){
-			console.log(error);
+            console.log(error);
+            return;
 		}else{
-			console.log(results);
+            console.log(results);
+            return;
 		}
 	});
 }

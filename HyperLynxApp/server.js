@@ -14,6 +14,7 @@ const path = require('path');
 const mysql = require('mysql');
 const dotenv = require('dotenv');
 const cookieParser = require('cookie-parser');
+const schedule = require('node-schedule');
 const flash = require('connect-flash');
 //Authentication Packages
 const session = require('express-session');
@@ -21,6 +22,8 @@ const passport = require('passport');
 const MySQLStore = require('express-mysql-session')(session); 
 //Sequelize DB
 const sequelize = require('./config/database');
+//date checker stuff
+const checker = require('./controllers/regularCheck');
 
 let app = express();
 
@@ -94,6 +97,36 @@ app.use('/home/game', require('./routes/game'));
 app.use('/home/trivia', require('./routes/trivia'));
 
 app.use('/room', require('./routes/rooms'));
+
+
+
+var sportsOn = schedule.scheduleJob('0 2 * * *', function(){
+    var date = new Date();
+    date.setHours(-4,0,0,0);
+    checker.getInfo().then(results =>{      
+        for(let i = 0; i < results.length; i++){
+            var date2 = new Date(results[i].ExpireDate);
+            if(date.getTime() === date2.getTime()){
+                console.log('same')
+                checker.lockRoom(results[i].roomID).then(data => {
+                    console.log(data);
+                    console.log('locked room '+ results[i].roomID+'');
+                })
+            }
+            date2.setDate(date2.getDate() + 1);
+            if(date.getTime() === date2.getTime()){
+                console.log('yesterday')
+                checker.doResultStuff(results[i].roomID).then(data => {
+                    console.log(data);
+                });
+            }
+        }
+        date.setDate(date.getDate() - 1);
+        checker.endMatches(date).then(data =>{
+            console.log(data);
+        });
+    })
+});
 
 
 //server info

@@ -30,7 +30,11 @@ module.exports = db.define(
         },
         username:{
             type: Sequelize.STRING        
-        }
+        },
+        locked:{
+            type: Sequelize.BOOLEAN,
+            allowNull: false
+        },
     },
     {
         timestamps: false

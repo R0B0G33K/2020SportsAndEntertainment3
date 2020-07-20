@@ -52,7 +52,7 @@
         <div style="text-align: center;"> 
             <table id="<%=betID %>">
                 <div class="container"> 
-                    <tr>
+                    <tr >
                         <th>Competitors</th>
                         <th>Selection</th>
                     </tr>
@@ -66,9 +66,10 @@
                     <% } %> <% } %>
                 </div>
             </table>
+            <br>
             <h3 style="margin-bottom: 2.5em;">Pool: <%= pool %></h3>
         </div>
-        <%if(!(user.id == HostID)){%>
+        <%if(!(user.id == HostID) && (locked == 0)){%>
         <form style="padding: 0;" method="POST" action="/room/<%= roomID %>/<%=betID %>/joinBet">
             <ul class="flex-outer">
             <input type="hidden" id="wager" name="wager" value =<%=found.wager%>>
@@ -82,7 +83,7 @@
             </li>
         </ul>
         </form>
-        <% } else{%>
+        <% } else if(locked == 0){%>
          <form style="padding: 0;" method="POST" action="/room/<%= roomID %>/<%=betID %>/cancelBet">
             <ul class="flex-outer">
             <input type="hidden" id="wager" name="wager" value =<%=found.wager%>>
@@ -101,7 +102,7 @@
         <% } %>
 
         <div class="container"> 
-        <% if(user.id == HostID) { %>
+        <% if((user.id == HostID) && (locked == 0)) { %>
         <h2 style="margin-top: 100px; text-align: center; padding-bottom: 1%;">Add <%=textadd%> challenge to the room</h2>
         <form method="POST" action="/room/<%= roomID %>/postChallenge">
             <ul class="flex-outer">
@@ -140,7 +141,7 @@
         <% } %>
         </div>
 
-        <% if(listOfBets.length != 0) { console.log(listOfBets.length) %>
+        <% if((listOfBets.length != 0) && (locked == 0)) { console.log(listOfBets.length) %>
         <div id="share-buttons">
     
             <!-- Email -->
@@ -185,7 +186,7 @@
         <hr>
 
         <div class="container"> 
-            <% if(user.id == HostID) { %>
+            <% if((user.id == HostID) && (locked == 0)) { %>
                 <form method="POST" onsubmit="return confirm('Do you really want to delete this room?');" action="/room/delete">
                     <ul class="flex-outer" >
                         <input type="hidden" id="HostID" name="HostID" value =<%=HostID%>>

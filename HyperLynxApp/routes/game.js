@@ -139,23 +139,26 @@ router.get('/leaderboard/:id/listRooms',authenticationMiddleware(), async (req, 
             for(let i = 0; i < roomids.length; i++){
                 await Room.findAll({
                     raw: true,
-                    attributes: ['roomID', 'Game', 'HostID', 'username'],
+                    attributes: ['roomID', 'Game', 'HostID', 'username','Public'],
                     where: {
                         roomID: roomids[i]
                     }
                 })
                 .then(rooms =>{
-                    if(rooms === undefined || rooms.length == 0){
-
-                    }
-                    else{
-                    roomsBetOn.push(rooms[i]);
-                    res.render('roomList.ejs', {roomList: roomsBetOn, user: req.user, type: 'other' })
+                    console.log(rooms);
+                    if(rooms[0].Public == 1){
+                    roomsBetOn.push(rooms[0]);
                     }
                 })
                 .catch(err => console.log(err));
             }
-
+            if(!(roomsBetOn[0] == null)){
+                res.render('roomList.ejs', {roomList: roomsBetOn, user: req.user, type: 'other' })
+            }
+            else{
+                req.flash('error', 'That user is not currently in any challenge room!');
+                res.redirect('/home'); 
+            }
         }
     })
     .catch(err => console.log(err));
@@ -254,7 +257,7 @@ router.post('/:org/:match/listAll',authenticationMiddleware(), async (req, res) 
         if(rooms === undefined || rooms.length == 0){ 
             console.log('no rooms for that specific game');
             req.flash('error', 'There are no public rooms yet for that game!');
-            res.redirect("home/game/"+req.params.org+"/"+req.params.match+"");
+            res.redirect("/home/game/"+req.params.org+"/"+req.params.match+"");
         }
         else {
             console.log(rooms)
@@ -327,7 +330,8 @@ async function CreateRoom(tempRoomID, id, org, match, username, trueset, date){
         Game: match,
         Public: trueset,
         ExpireDate: date,
-        username: username
+        username: username,
+        locked: false
     });  
 }
 

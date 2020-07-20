@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const mysql = require('mysql');
+const Room = require('../models/rooms');
+const Challenge = require('../models/challenges');
 const bcrypt = require('bcryptjs');
 var bodyParser = require('body-parser')
 
@@ -49,9 +51,31 @@ router.post('/updateInfo', async (req, res) => {
 				return;
 		 }
 		 
-		 updateDBInfo(username, email, name, req.user.id);
+		updateDBInfo(username, email, name, req.user.id);
+		await Room.update(
+            {username: username},{
+            where:{
+                HostID: req.user.id
+            }
+			})
+			.then(data =>{
+				console.log(data);
+			})
+			.catch(err => console.log(err));
+
+		await Challenge.update(
+			{userName: username},{
+			where:{
+				userID: req.user.id
+			}
+			})
+			.then(data =>{
+				console.log('challenges')
+				console.log(data);
+			})
+			.catch(err => console.log(err));
 		 
-		 if(req.body.oldpassword != null && await bcrypt.compare(req.body.oldpassword, req.user.password)){
+		if(req.body.oldpassword != null && await bcrypt.compare(req.body.oldpassword, req.user.password)){
 			 if((req.body.newpassword != null) && (req.body.newpassword == req.body.passwordConfirm)){
 				 let hashedPassword = await bcrypt.hash(req.body.newpassword, 8);
 				 updateDBPass(hashedPassword, req.user.id);
@@ -69,9 +93,11 @@ router.get('/home', authenticationMiddleware(), async (req, res) => {
 	await db.query('SELECT id, username, points FROM users ORDER BY points DESC Limit 10', (error,results) =>{
 		if(error){
 			console.log(error);
+			return;
 		}
 		else{
 			curLeaders = results;
+			return;
 		}
 	});
 
@@ -103,15 +129,9 @@ router.get('/about', (req, res) => {
 
 });
 
-router.get('/prizes', (req, res) => {
+router.get('/prizes',authenticationMiddleware(), (req, res) => {
 	req.session.touch();
-	if(req.user != undefined){
-		res.render('prizes.ejs',{isUser: true, user: req.user});
-	}
-	else{
-		res.render('prizes.ejs',{isUser: false});
-	}
-
+	res.render('prizes.ejs',{isUser: true, user: req.user});
 });
 
 router.get('/account', authenticationMiddleware(), (req, res) => {
@@ -147,8 +167,10 @@ function updateDB(unfixedUser){
 	[unfixedUser.points, unfixedUser.id], (error, results) =>{
 		if(error){
 			console.log(error);
+			return;
 		}else{
 			console.log(results);
+			return;
 		}
 	});
 }
@@ -158,8 +180,10 @@ function updateDBInfo(username, email, name, userId){
 	[username, email, name, userId], (error, results) =>{
 		if(error){
 			console.log(error);
+			return;
 		}else{
 			console.log(results);
+			return;
 		}
 	});
 }
@@ -169,8 +193,10 @@ function updateDBPass(password, userId){
 	[password, userId], (error, results) =>{
 		if(error){
 			console.log(error);
+			return;
 		}else{
 			console.log(results);
+			return;
 		}
 	});
 }

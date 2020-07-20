@@ -218,7 +218,7 @@ router.get('/:roomID', authenticationMiddleware(), async (req, res) => {
 	
 	await Room.findAll({
 		raw: true,
-        attributes: ['HostID', 'Org', 'Game', 'Public'],
+        attributes: ['HostID', 'Org', 'Game', 'Public','locked'],
         where: {
             roomID: req.params.roomID
         }
@@ -237,7 +237,7 @@ router.get('/:roomID', authenticationMiddleware(), async (req, res) => {
 				}
 			})
 			.then(matches =>{
-				res.render('room.ejs', {HostID: rooms[0].HostID, user: req.user, message: req.flash('error'), Org: rooms[0].Org, Game: rooms[0].Game, status: rooms[0].Public, roomID: req.params.roomID, listOfBets: roomChallenges, listOfBetID: uniqueBetID, teams: matches[0]});
+				res.render('room.ejs', {HostID: rooms[0].HostID, user: req.user, message: req.flash('error'), Org: rooms[0].Org, Game: rooms[0].Game, status: rooms[0].Public, roomID: req.params.roomID, listOfBets: roomChallenges, listOfBetID: uniqueBetID, teams: matches[0], locked: rooms[0].locked});
 				roomChallenges =[];
 
 			})
@@ -264,8 +264,10 @@ function fixfunds(unfixedUser){
 	[unfixedUser.wager, unfixedUser.userID], (error, results) =>{
 		if(error){
 			console.log(error);
+			return;
 		}else{
 			console.log(results);
+			return;
 		}
 	});
 }
@@ -275,8 +277,10 @@ function updateDB(unfixedUser){
 	[unfixedUser.points, unfixedUser.id], (error, results) =>{
 		if(error){
 			console.log(error);
+			return;
 		}else{
 			console.log(results);
+			return;
 		}
 	});
 }

@@ -379,6 +379,24 @@ nav a {
   }   
 }
 
+
+
+table{
+  width: 100%; 
+  table-layout: fixed; 
+  border: black; 
+  font-size: 99%;
+  border: 10% solid #333;
+  border-collapse: collapse;
+}
+
+th, td{
+  padding: 3%;
+  text-align: center;
+  border: 3px solid #333;
+}
+
+
 /* End Navigation  */
 
 
