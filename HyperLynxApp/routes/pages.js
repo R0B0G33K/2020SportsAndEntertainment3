@@ -106,6 +106,7 @@ router.get('/home', authenticationMiddleware(), async (req, res) => {
 	[req.user.id], (error, results) =>{
 		if(error){
 			console.log(error);
+			return
 		}else{
             console.log( results[0].points);
 			req.user.points = results[0].points;
@@ -113,7 +114,7 @@ router.get('/home', authenticationMiddleware(), async (req, res) => {
 			req.user.email = results[0].email;
 			req.user.name = results[0].name;
 			req.user.password = results[0].password;
-            res.render('home.ejs', {user: req.user, curleader: curLeaders, message: req.flash('error')});
+            return res.render('home.ejs', {user: req.user, curleader: curLeaders, message: req.flash('error')});
 		}
 	});
 });

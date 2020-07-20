@@ -5,17 +5,30 @@
         <div class="container">
             <div id="timer"></div>
 
-            <h1> <%= teamName.split("_").join(" ") %> Trivia</h1>
-            <h2><%= question.Question %></h2>
+            <h1 style="text-align: center;"> <%= teamName.split("_").join(" ") %> Trivia</h1>
+            <h2 style="text-align: center;"><%= question.Question %></h2>
+            <br>
     
-            <div class="container"> 
+            <div class="container" style="text-align: center;"> 
                 <form action="/home/trivia/submitAnswer" method="POST">
                 <input type="hidden" id="answer" name="answer" value ="<%=question.AnswerIndex%>">
                 <input type="hidden" id="worth" name="worth" value =<%=question.Worth%>>
-                <button class="button" name="userAnswer" value="1"><%= question.A1 %></button>
-                <button class="button" name="userAnswer" value="2"><%= question.A2 %></button>
-                <button class="button" name="userAnswer" value="3"><%= question.A3 %></button>
-                <button class="button" name="userAnswer" value="4"><%= question.A4 %></button>
+                <div class="quizButtons">
+                <button style="width: 90%;" class="button" name="userAnswer" value="1"><%= question.A1 %></button>
+                </div>
+                <br>
+                <div class="quizButtons">
+                <button  style="width: 90%;" class="button" name="userAnswer" value="2"><%= question.A2 %></button>
+                </div>
+                <br>
+                <div class="quizButtons">
+                <button  style="width: 90%;" class="button" name="userAnswer" value="3"><%= question.A3 %></button>
+                </div>
+                <br>
+                <div class="quizButtons">
+                <button  style="width: 90%;" class="button" name="userAnswer" value="4"><%= question.A4 %></button>
+                </div>
+                </div>
                 </form>
             </div>
         </div>
