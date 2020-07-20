@@ -17,6 +17,7 @@ const db = mysql.createConnection({
 });
 
 router.get('/',authenticationMiddleware(), async (req, res) => {
+    orgs =[];
     req.session.touch();
     await Sport.aggregate('sport', 'DISTINCT', { plain: false })
         .then(sports => {
@@ -45,6 +46,7 @@ router.post('/submitAnswer',authenticationMiddleware(),(req, res) => {
 
 
 router.get('/:org',authenticationMiddleware(), async (req, res) => {
+    teams = [];
     userElement = req.params.org;
     if(!(orgs.some(checkMatching))){
         return res.redirect('/home/trivia')
