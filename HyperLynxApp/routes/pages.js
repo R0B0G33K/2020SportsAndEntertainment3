@@ -3,6 +3,7 @@ const router = express.Router();
 const mysql = require('mysql');
 const Room = require('../models/rooms');
 const Challenge = require('../models/challenges');
+const Data = require('../models/dataCollect');
 const bcrypt = require('bcryptjs');
 var bodyParser = require('body-parser')
 
@@ -119,8 +120,9 @@ router.get('/home', authenticationMiddleware(), async (req, res) => {
 	});
 });
 
-router.get('/about', (req, res) => {
+router.get('/about', async (req, res) => {
 	req.session.touch();
+	await Data.increment({visitAbout: 1}, {where: {id: 0}});
 	if(req.user != undefined){
 		res.render('about.ejs',{isUser: true, user: req.user});
 	}
@@ -144,6 +146,16 @@ router.get('/account', authenticationMiddleware(), (req, res) => {
 
 router.get('/back',authenticationMiddleware(),(req, res) => {
     res.redirect('/home');
+});
+
+router.post('/:location/socialMedia', async (req, res) => {
+	await Data.increment({[req.body.social]: 1}, {where: {id: 0}});
+	if(req.params.location != 'home'){
+		res.redirect("/room/"+req.params.location+"");
+	}
+	else{
+		res.redirect("/home");
+	}
 });
 
 function authenticationMiddleware () {  

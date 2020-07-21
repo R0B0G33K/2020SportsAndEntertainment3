@@ -3,6 +3,7 @@ const router = express.Router();
 const mysql = require('mysql');
 var bodyParser = require('body-parser')
 const Sport = require('../models/sports');
+const Data = require('../models/dataCollect');
 const Question = require('../models/questions');
 
 var orgs = ["error please refresh"];
@@ -78,6 +79,8 @@ router.get('/:org/:team',authenticationMiddleware(),async (req, res) => {
     if(!(teams.some(checkMatching))){
         return res.redirect('/home/trivia')
     }
+
+    await Data.increment({visitTrivia: 1}, {where: {id: 0}});
 
     var chosenQuestion = {};
     await Question.findAll({

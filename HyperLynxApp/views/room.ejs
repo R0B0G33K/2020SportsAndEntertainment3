@@ -72,8 +72,8 @@
         <%if(!(user.id == HostID) && (locked == 0)){%>
         <form style="padding: 0;" method="POST" action="/room/<%= roomID %>/<%=betID %>/joinBet">
             <ul class="flex-outer">
-            <input type="hidden" id="wager" name="wager" value =<%=found.wager%>>
-            <input type="hidden" id="type" name="type" value =<%=found.type%>>
+            <input type="hidden" id="wager" name="wager" value ='<%=found.wager%>'>
+            <input type="hidden" id="type" name="type" value ='<%=found.type%>'>
             <li>
                 <label for="bet">What is your prediction?</label>
                 <input type="text" id="bet" name="bet">
@@ -86,11 +86,11 @@
         <% } else if(locked == 0){%>
          <form style="padding: 0;" method="POST" action="/room/<%= roomID %>/<%=betID %>/cancelBet">
             <ul class="flex-outer">
-            <input type="hidden" id="wager" name="wager" value =<%=found.wager%>>
-            <input type="hidden" id="type" name="type" value =<%=found.type%>>
-            <input type="hidden" id="HostID" name="HostID" value =<%=HostID%>>
-            <input type="hidden" id="Org" name="Org" value =<%=Org%>> 
-            <input type="hidden" id="Game" name="Game" value =<%=Game%>>   
+            <input type="hidden" id="wager" name="wager" value ='<%=found.wager%>'>
+            <input type="hidden" id="type" name="type" value ='<%=found.type%>'>
+            <input type="hidden" id="HostID" name="HostID" value ='<%=HostID%>'>
+            <input type="hidden" id="Org" name="Org" value ='<%=Org%>'> 
+            <input type="hidden" id="Game" name="Game" value ='<%=Game%>'>   
             <li>
                 <button class="button" type="submit">Cancel Bet</button>
             </li>
@@ -137,11 +137,11 @@
                 </li>
             </ul>
         </form>
-        <br />
-        <% } %>
+        <br>
         </div>
+        <% } %>
 
-        <% if((listOfBets.length != 0) && (locked == 0)) { console.log(listOfBets.length) %>
+        <% if((listOfBets.length != 0) && (locked == 0)) { console.log(listOfBets.length); %>
         <div id="share-buttons">
     
             <!-- Email -->
@@ -153,28 +153,32 @@
          
             <!-- Facebook -->
             <div class='socialwidget'>
-            <a href="http://www.facebook.com/sharer.php?u=http://www.squareup-sports.tech/room/<%= roomID %>" target="_blank">
+            <a href="http://www.facebook.com/sharer.php?u=http://www.squareup-sports.tech/room/<%= roomID %>" 
+                target="_blank" onclick="link('facebook')">
                 <img src="/images/social/facebook.png" alt="Facebook" />
             </a>
             </div>
 
             <!-- Reddit -->
             <div class='socialwidget'>
-            <a href="http://reddit.com/submit?url=http://www.squareup-sports.tech/room/<%= roomID %>&amp;title=My Squareup-Sports Challenge Room" target="_blank">
+            <a href="http://reddit.com/submit?url=http://www.squareup-sports.tech/room/<%= roomID %>&amp;title=My Squareup-Sports Challenge Room" 
+                target="_blank" onclick="link('reddit')">
                 <img src="/images/social/reddit.png" alt="Reddit" />
             </a>
             </div>
 
             <!-- Tumblr-->
             <div class='socialwidget'>
-            <a href="http://www.tumblr.com/share/link?url=http://www.squareup-sports.tech/room/<%= roomID %>&amp;title=My Squareup-Sports Challenge Room" target="_blank">
+            <a href="http://www.tumblr.com/share/link?url=http://www.squareup-sports.tech/room/<%= roomID %>&amp;title=My Squareup-Sports Challenge Room" 
+                target="_blank" onclick="link('tumbler')">
                 <img src="/images/social/tumblr.png" alt="Tumblr" />
             </a>
             </div>
              
             <!-- Twitter -->
             <div class='socialwidget'>
-            <a href="https://twitter.com/share?url=http://www.squareup-sports.tech/room/<%= roomID %>&amp;text=My%20Squareup-Sports%20Challenge%20Room&amp;hashtags=squareup" target="_blank">
+            <a href="https://twitter.com/share?url=http://www.squareup-sports.tech/room/<%= roomID %>&amp;text=My%20Squareup-Sports%20Challenge%20Room&amp;hashtags=squareup" 
+                target="_blank"  onclick="link('twitter')">
                 <img src="/images/social/twitter.png" alt="Twitter" />
             </a>
             </div>
@@ -182,6 +186,9 @@
     
         </div>
         <% } %>
+        <form method="POST" action="/<%= roomID %>/socialMedia" id="data" >
+            <input id="social" name="social" type="hidden" value="">
+        </form>
 
         <hr>
 
@@ -189,9 +196,9 @@
             <% if((user.id == HostID) && (locked == 0)) { %>
                 <form method="POST" onsubmit="return confirm('Do you really want to delete this room?');" action="/room/delete">
                     <ul class="flex-outer" >
-                        <input type="hidden" id="HostID" name="HostID" value =<%=HostID%>>
-                        <input type="hidden" id="Org" name="Org" value =<%=Org%>> 
-                        <input type="hidden" id="Game" name="Game" value =<%=Game%>>    
+                        <input type="hidden" id="HostID" name="HostID" value ='<%=HostID%>'>
+                        <input type="hidden" id="Org" name="Org" value ='<%=Org%>'> 
+                        <input type="hidden" id="Game" name="Game" value ='<%=Game%>'>    
                         <li><button class="button" type="submit">Close Room</button></li>
                     </ul>
                 </form>
@@ -199,4 +206,11 @@
         </div>
 
     </div>
+    <script>
+        function link(type){
+            document.getElementById("social").value = type;
+            document.getElementById("data").submit();
+        }
+    </script>
+    
 </body>

@@ -5,6 +5,7 @@ const Sport = require('../models/sports');
 const Match = require('../models/matches');
 const Room = require('../models/rooms');
 const Challenge = require('../models/challenges');
+const Data = require('../models/dataCollect');
 const { Op } = require('sequelize');
 var crypto = require('crypto');
 
@@ -75,6 +76,8 @@ router.post('/:org/:match/createroom',authenticationMiddleware(), async (req, re
     if(!(games.some(checkMatching))){
         return res.redirect('/home/game')
     }
+
+    await Data.increment({createRoom: 1}, {where: {id: 0}});
 
     var matchDate;
     await Match.findAll({
@@ -242,6 +245,7 @@ router.post('/:org/:match/listAll',authenticationMiddleware(), async (req, res) 
         return res.redirect('/home/game')
     }
 
+    await Data.increment({joinRoom: 1}, {where: {id: 0}});
     userElement = null;
 
     await Room.findAll({
