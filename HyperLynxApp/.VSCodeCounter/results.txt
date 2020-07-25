@@ -1,0 +1,86 @@
+Date : 2020-07-23 23:04:38
+Directory : c:\CreatedApps\HyperLynxApp
+Total : 46 files,  5642 codes, 144 comments, 500 blanks, all 6286 lines
+
+Languages
++------------+------------+------------+------------+------------+------------+
+| language   | files      | code       | comment    | blank      | total      |
++------------+------------+------------+------------+------------+------------+
+| JSON       |          2 |      1,962 |          0 |          2 |      1,964 |
+| JavaScript |         16 |      1,479 |         24 |        225 |      1,728 |
+| HTML       |         19 |      1,010 |         56 |        141 |      1,207 |
+| XML        |          8 |        708 |          4 |          7 |        719 |
+| CSS        |          1 |        483 |         60 |        125 |        668 |
++------------+------------+------------+------------+------------+------------+
+
+Directories
++------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                         | files      | code       | comment    | blank      | total      |
++------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                            |         46 |      5,642 |        144 |        500 |      6,286 |
+| config                                                                       |          1 |          7 |          0 |          1 |          8 |
+| controllers                                                                  |          2 |        192 |          1 |         16 |        209 |
+| models                                                                       |          6 |        198 |          0 |          7 |        205 |
+| public                                                                       |         10 |      1,318 |         64 |        159 |      1,541 |
+| public\images                                                                |          8 |        708 |          4 |          7 |        719 |
+| public\images\teams                                                          |          8 |        708 |          4 |          7 |        719 |
+| public\images\teams\NFL                                                      |          3 |         18 |          0 |          3 |         21 |
+| public\images\teams\WNBA                                                     |          5 |        690 |          4 |          4 |        698 |
+| public\libs                                                                  |          1 |        127 |          0 |         27 |        154 |
+| routes                                                                       |          5 |        864 |          5 |        147 |      1,016 |
+| views                                                                        |         19 |      1,010 |         56 |        141 |      1,207 |
+| views\partials                                                               |          4 |        170 |          9 |         24 |        203 |
++------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| filename                                                                     | language   | code       | comment    | blank      | total      |
++------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| c:\CreatedApps\HyperLynxApp\config\database.js                               | JavaScript |          7 |          0 |          1 |          8 |
+| c:\CreatedApps\HyperLynxApp\controllers\auth.js                              | JavaScript |         84 |          1 |         14 |         99 |
+| c:\CreatedApps\HyperLynxApp\controllers\regularCheck.js                      | JavaScript |        108 |          0 |          2 |        110 |
+| c:\CreatedApps\HyperLynxApp\models\challenges.js                             | JavaScript |         33 |          0 |          1 |         34 |
+| c:\CreatedApps\HyperLynxApp\models\dataCollect.js                            | JavaScript |         40 |          0 |          1 |         41 |
+| c:\CreatedApps\HyperLynxApp\models\matches.js                                | JavaScript |         26 |          0 |          1 |         27 |
+| c:\CreatedApps\HyperLynxApp\models\questions.js                              | JavaScript |         41 |          0 |          1 |         42 |
+| c:\CreatedApps\HyperLynxApp\models\rooms.js                                  | JavaScript |         41 |          0 |          1 |         42 |
+| c:\CreatedApps\HyperLynxApp\models\sports.js                                 | JavaScript |         17 |          0 |          2 |         19 |
+| c:\CreatedApps\HyperLynxApp\package-lock.json                                | JSON       |      1,930 |          0 |          1 |      1,931 |
+| c:\CreatedApps\HyperLynxApp\package.json                                     | JSON       |         32 |          0 |          1 |         33 |
+| c:\CreatedApps\HyperLynxApp\public\images\teams\NFL\Baltimore_Ravens.svg     | XML        |         15 |          0 |          1 |         16 |
+| c:\CreatedApps\HyperLynxApp\public\images\teams\NFL\Buffalo_Bills.svg        | XML        |          2 |          0 |          1 |          3 |
+| c:\CreatedApps\HyperLynxApp\public\images\teams\NFL\New_England_Patriots.svg | XML        |          1 |          0 |          1 |          2 |
+| c:\CreatedApps\HyperLynxApp\public\images\teams\WNBA\Atlanta_Dream.svg       | XML        |        124 |          1 |          1 |        126 |
+| c:\CreatedApps\HyperLynxApp\public\images\teams\WNBA\Indiana_Fever.svg       | XML        |         99 |          1 |          1 |        101 |
+| c:\CreatedApps\HyperLynxApp\public\images\teams\WNBA\New_York_Liberty.svg    | XML        |        312 |          1 |          1 |        314 |
+| c:\CreatedApps\HyperLynxApp\public\images\teams\WNBA\Seattle_Storm.svg       | XML        |        154 |          1 |          1 |        156 |
+| c:\CreatedApps\HyperLynxApp\public\images\teams\WNBA\Washington_Mystics.svg  | XML        |          1 |          0 |          0 |          1 |
+| c:\CreatedApps\HyperLynxApp\public\libs\jquery.tickerNews.min.js             | JavaScript |        127 |          0 |         27 |        154 |
+| c:\CreatedApps\HyperLynxApp\public\trivia.css                                | CSS        |        483 |         60 |        125 |        668 |
+| c:\CreatedApps\HyperLynxApp\routes\auth.js                                   | JavaScript |          6 |          0 |          4 |         10 |
+| c:\CreatedApps\HyperLynxApp\routes\game.js                                   | JavaScript |        292 |          1 |         49 |        342 |
+| c:\CreatedApps\HyperLynxApp\routes\pages.js                                  | JavaScript |        183 |          1 |         33 |        217 |
+| c:\CreatedApps\HyperLynxApp\routes\rooms.js                                  | JavaScript |        268 |          1 |         40 |        309 |
+| c:\CreatedApps\HyperLynxApp\routes\trivia.js                                 | JavaScript |        115 |          2 |         21 |        138 |
+| c:\CreatedApps\HyperLynxApp\server.js                                        | JavaScript |         91 |         18 |         27 |        136 |
+| c:\CreatedApps\HyperLynxApp\views\about.ejs                                  | HTML       |        107 |          0 |          8 |        115 |
+| c:\CreatedApps\HyperLynxApp\views\account.ejs                                | HTML       |         40 |          0 |          0 |         40 |
+| c:\CreatedApps\HyperLynxApp\views\completedTrivia.ejs                        | HTML       |         13 |          0 |          3 |         16 |
+| c:\CreatedApps\HyperLynxApp\views\create-game.ejs                            | HTML       |         27 |          0 |          5 |         32 |
+| c:\CreatedApps\HyperLynxApp\views\home.ejs                                   | HTML       |         71 |          6 |          9 |         86 |
+| c:\CreatedApps\HyperLynxApp\views\index.ejs                                  | HTML       |         15 |          2 |         11 |         28 |
+| c:\CreatedApps\HyperLynxApp\views\login.ejs                                  | HTML       |         28 |          0 |          7 |         35 |
+| c:\CreatedApps\HyperLynxApp\views\partials\head.ejs                          | HTML       |          9 |          3 |          4 |         16 |
+| c:\CreatedApps\HyperLynxApp\views\partials\leaderboard.ejs                   | HTML       |         37 |          1 |          0 |         38 |
+| c:\CreatedApps\HyperLynxApp\views\partials\navbar.ejs                        | HTML       |         58 |          2 |         11 |         71 |
+| c:\CreatedApps\HyperLynxApp\views\partials\navbarAuth.ejs                    | HTML       |         66 |          3 |          9 |         78 |
+| c:\CreatedApps\HyperLynxApp\views\pick-sport.ejs                             | HTML       |         27 |          0 |          6 |         33 |
+| c:\CreatedApps\HyperLynxApp\views\prizes.ejs                                 | HTML       |         34 |          0 |          5 |         39 |
+| c:\CreatedApps\HyperLynxApp\views\register.ejs                               | HTML       |         45 |         34 |          8 |         87 |
+| c:\CreatedApps\HyperLynxApp\views\room.ejs                                   | HTML       |        193 |          5 |         18 |        216 |
+| c:\CreatedApps\HyperLynxApp\views\roomList.ejs                               | HTML       |         44 |          0 |          5 |         49 |
+| c:\CreatedApps\HyperLynxApp\views\teams.ejs                                  | HTML       |         29 |          0 |          6 |         35 |
+| c:\CreatedApps\HyperLynxApp\views\triviaQ.ejs                                | HTML       |        138 |          0 |         21 |        159 |
+| c:\CreatedApps\HyperLynxApp\views\upcomingGames.ejs                          | HTML       |         29 |          0 |          5 |         34 |
+| Total                                                                        |            |      5,642 |        144 |        500 |      6,286 |
++------------------------------------------------------------------------------+------------+------------+------------+------------+------------+

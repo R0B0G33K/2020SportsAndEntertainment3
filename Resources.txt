@@ -1,0 +1,18 @@
+﻿RESOURCES:
+
+
+Modules listed on DevPost.
+
+
+Reference Videos: 
+https://www.youtube.com/playlist?list=PLD9SRxG6ST3GBsczn8OUKLaErhrvOz9zQ
+also used Chris courses
+
+
+Share buttons from: 
+https://simplesharebuttons.com/html-share-buttons
+
+
+Leaderboard: 
+https://www.jqueryscript.net/animation/Infinite-News-Tick
+er-Plugin-with-jQuery-tickerNews.html
